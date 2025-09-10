@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}My ML Projects{% endblock %}</title>
+        <link rel="'stylesheet" href="{{url_for('static', filename='style1.css')}}">
+        <script src="{{ url_for('static', filename='toggle-dark.js') }}"></script>
+    </head>
+    <body>
+        <button class="toggle-dark">🌓</button>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/autoencoder">Denoising Autoencoder</a> |
+            <a href="/reinforce">Cartpole Reinforce</a>
+            <a href="{{ url_for('static', filename='resume/jugal_alan_resume.pdf') }}">Download Resume</a>
+        </nav>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

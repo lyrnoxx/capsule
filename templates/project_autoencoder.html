@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Denoising Autoencoder{% endblock %}
+{% block content %}
+<h2>Demo</h2>
+<form method="POST" enctype="multipart/form-data">
+    <label>Upload a grayscale image (28x28 preferred):</label><br>
+    <input type="file" name="image">
+    <input type="submit" value="Denoise">
+</form>
+
+{% if input_image and output_image %}
+<h3>Result:</h3>
+<table>
+  <tr>
+    <td><b>Original</b></td>
+    <td><b>Denoised</b></td>
+  </tr>
+  <tr>
+    <td><img src="{{ url_for('static', filename=input_image) }}" width="150"></td>
+    <td><img src="{{ url_for('static', filename=output_image) }}" width="150"></td>
+  </tr>
+</table>
+{% endif %}
+
+{% endblock %}
