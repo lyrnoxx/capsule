@@ -5,51 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UAV Ground Control Station</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- Fix: Added Leaflet Rotated Marker plugin for icon rotation -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-rotatedmarker/0.2.0/leaflet.rotatedMarker.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Custom styles for a GCS-themed UI */
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #E0E0E0; /* Light gray text for readability in dark mode */
-        }
-        .leaflet-container {
-            background: #1a202c; /* Dark background for the map */
-        }
-        .panel {
-            background-color: rgba(30, 41, 59, 0.9); /* Semi-transparent dark slate */
-            backdrop-filter: blur(5px);
-            border: 1px solid #4A5568;
-        }
-        .panel-header {
-            border-bottom: 1px solid #4A5568;
-        }
-        /* Custom scrollbar for aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #2D3748;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4A5568;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-        }
-        /* Custom icon styles */
-        .uav-icon {
-            filter: drop-shadow(0 0 5px #38bdf8); /* Glow effect for visibility */
-        }
+        body { font-family: 'Inter', sans-serif; color: #E0E0E0; }
+        .leaflet-container { background: #1a202c; }
+        .panel { background-color: rgba(30, 41, 59, 0.9); backdrop-filter: blur(5px); border: 1px solid #4A5568; }
+        .panel-header { border-bottom: 1px solid #4A5568; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #2D3748; }
+        ::-webkit-scrollbar-thumb { background: #4A5568; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #718096; }
+        .uav-icon { filter: drop-shadow(0 0 5px #38bdf8); }
     </style>
 </head>
 <body class="bg-gray-900 overflow-hidden">
     <div id="app" class="flex flex-col h-screen">
-        <!-- Header -->
+        <!-- Header unchanged -->
         <header class="bg-gray-800 border-b border-gray-700 p-3 flex items-center justify-between z-20">
             <h1 class="text-xl font-bold text-white flex items-center">
                 <i data-lucide="drone" class="mr-2"></i>
@@ -63,34 +37,27 @@
                 </div>
             </div>
         </header>
-
-        <!-- Main Content -->
+        <!-- Main Content unchanged -->
         <div class="flex-1 flex overflow-hidden">
-            <!-- Sidebar -->
+            <!-- Sidebar unchanged -->
             <aside class="w-full md:w-1/3 lg:w-1/4 h-full flex flex-col p-4 space-y-4 overflow-y-auto">
-                <!-- UAV Status Panel -->
+                <!-- Panel code unchanged -->
                 <div class="panel rounded-lg flex-shrink-0">
                     <div class="panel-header p-3 flex items-center">
                         <i data-lucide="plane" class="mr-2 text-cyan-400"></i>
                         <h2 class="font-bold text-white">UAV Fleet Status</h2>
                     </div>
-                    <div id="uav-status-list" class="p-3 space-y-3 max-h-64 overflow-y-auto">
-                        <!-- UAV items will be injected here -->
-                    </div>
+                    <div id="uav-status-list" class="p-3 space-y-3 max-h-64 overflow-y-auto"></div>
                 </div>
-
-                <!-- Event Log -->
+                <!-- Event Log unchanged -->
                 <div class="panel rounded-lg flex-1 flex flex-col min-h-0">
                     <div class="panel-header p-3 flex items-center">
                         <i data-lucide="terminal" class="mr-2 text-cyan-400"></i>
                         <h2 class="font-bold text-white">Event Log</h2>
                     </div>
-                    <div id="event-log" class="p-3 space-y-2 text-sm font-mono overflow-y-auto flex-1">
-                        <!-- Log messages will be injected here -->
-                    </div>
+                    <div id="event-log" class="p-3 space-y-2 text-sm font-mono overflow-y-auto flex-1"></div>
                 </div>
-
-                <!-- Layer Control -->
+                <!-- Layer Control unchanged -->
                 <div class="panel rounded-lg flex-shrink-0">
                     <div class="panel-header p-3 flex items-center">
                         <i data-lucide="layers" class="mr-2 text-cyan-400"></i>
@@ -112,7 +79,6 @@
                     </div>
                 </div>
             </aside>
-
             <!-- Map -->
             <main class="flex-1 h-full relative">
                 <div id="map" class="h-full w-full"></div>
@@ -123,34 +89,30 @@
             </main>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Icon Initialization ---
             lucide.createIcons();
-
-            // --- Map Initialization ---
-            const map = L.map('map').setView([28.6139, 77.2090], 13); // Centered on Delhi, India
+            // Set map to IIT Ropar coordinates
+            const map = L.map('map').setView([30.9686, 76.4733], 15); // Centered on IIT Ropar
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 subdomains: 'abcd',
                 maxZoom: 20
             }).addTo(map);
-
-            // --- Mock Data and State ---
+            // UAV mock data near IIT Ropar
             const fleet = [
-                { id: 'UAV-01', lat: 28.62, lng: 77.21, battery: 85, task: 'Surveying Sector A', icon: null },
-                { id: 'UAV-02', lat: 28.61, lng: 77.22, battery: 92, task: 'Mapping Flood Boundary', icon: null },
-                { id: 'UAV-03', lat: 28.63, lng: 77.20, battery: 74, task: 'Investigating Hotspot', icon: null },
-                { id: 'UAV-04', lat: 28.60, lng: 77.19, battery: 60, task: 'Returning to Base', icon: null }
+                { id: 'UAV-01', lat: 30.9696, lng: 76.4730, battery: 85, task: 'Surveying Sector A', icon: null },
+                { id: 'UAV-02', lat: 30.9680, lng: 76.4745, battery: 92, task: 'Mapping Flood Boundary', icon: null },
+                { id: 'UAV-03', lat: 30.9702, lng: 76.4723, battery: 74, task: 'Investigating Hotspot', icon: null },
+                { id: 'UAV-04', lat: 30.9671, lng: 76.4751, battery: 60, task: 'Returning to Base', icon: null }
             ];
-
+            // Hotspots near IIT Ropar
             const hotspots = [
-                { id: 'H-01', lat: 28.625, lng: 77.215, type: 'person' },
-                { id: 'H-02', lat: 28.615, lng: 77.225, type: 'building' },
-                { id: 'H-03', lat: 28.605, lng: 77.205, type: 'livestock' },
+                { id: 'H-01', lat: 30.9690, lng: 76.4745, type: 'person' },
+                { id: 'H-02', lat: 30.9700, lng: 76.4720, type: 'building' },
+                { id: 'H-03', lat: 30.9670, lng: 76.4735, type: 'livestock' },
             ];
-
+            // Flood zone polygon near IIT Ropar campus
             const floodGeoJSON = {
                 "type": "Feature",
                 "properties": {},
@@ -158,16 +120,16 @@
                     "type": "Polygon",
                     "coordinates": [
                         [
-                            [77.20, 28.61],
-                            [77.23, 28.60],
-                            [77.24, 28.63],
-                            [77.21, 28.64],
-                            [77.20, 28.61]
+                            [76.4720, 30.9670],
+                            [76.4750, 30.9675],
+                            [76.4760, 30.9700],
+                            [76.4735, 30.9710],
+                            [76.4720, 30.9670]
                         ]
                     ]
                 }
             };
-            
+            // Coverage gaps polygon near IIT Ropar
             const coverageGapsGeoJSON = {
                 "type": "Feature",
                 "properties": {},
@@ -175,40 +137,33 @@
                     "type": "Polygon",
                     "coordinates": [
                         [
-                            [77.18, 28.62],
-                            [77.19, 28.62],
-                            [77.19, 28.63],
-                            [77.18, 28.63],
-                            [77.18, 28.62]
+                            [76.4710, 30.9700],
+                            [76.4725, 30.9701],
+                            [76.4726, 30.9710],
+                            [76.4711, 30.9711],
+                            [76.4710, 30.9700]
                         ]
                     ]
                 }
             };
-
-            // --- Layer Groups for Toggling ---
+            // Layer Groups for Toggling
             const floodLayer = L.geoJSON(floodGeoJSON, {
                 style: { color: "#0077be", weight: 2, opacity: 0.6, fillOpacity: 0.3 }
             }).addTo(map);
-            
             const gapsLayer = L.geoJSON(coverageGapsGeoJSON, {
                 style: { color: "#facc15", weight: 2, opacity: 0.8, fillOpacity: 0.2, dashArray: '5, 5' }
             });
-
             const hotspotsLayer = L.layerGroup().addTo(map);
-
-            // --- UI Elements ---
             const uavStatusList = document.getElementById('uav-status-list');
             const eventLog = document.getElementById('event-log');
             const systemTimeEl = document.getElementById('system-time');
-
-            // --- Icon Definitions ---
+            // Icon Definitions
             const uavIcon = L.divIcon({
                 html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-navigation uav-icon"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>`,
                 className: '',
                 iconSize: [28, 28],
                 iconAnchor: [14, 14],
             });
-
             const hotspotIcons = {
                 person: L.divIcon({
                     html: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#f87171" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>`,
@@ -229,10 +184,7 @@
                     iconAnchor: [12, 12],
                 })
             };
-
-            // --- Core Functions ---
-            
-            // Function to update the UAV status panel
+            // Core Functions (unchanged, but uses new data)
             function updateUAVStatusPanel() {
                 uavStatusList.innerHTML = '';
                 fleet.forEach(uav => {
@@ -251,10 +203,8 @@
                     `;
                     uavStatusList.appendChild(uavElement);
                 });
-                lucide.createIcons(); // Re-render icons
+                lucide.createIcons();
             }
-            
-            // Function to log an event
             function logEvent(message, type = 'INFO') {
                 const timestamp = new Date().toLocaleTimeString();
                 const typeColors = {
@@ -265,31 +215,24 @@
                 const logEntry = document.createElement('p');
                 logEntry.innerHTML = `<span class="text-gray-500">${timestamp}</span> <span class="${typeColors[type]}">[${type}]</span> ${message}`;
                 eventLog.prepend(logEntry);
-                // Limit log size
                 if (eventLog.children.length > 50) {
                     eventLog.removeChild(eventLog.lastChild);
                 }
             }
-
-            // Function to update UAV markers on the map
             function updateUAVMarkers() {
                 fleet.forEach(uav => {
                     if (uav.icon) {
                         uav.icon.setLatLng([uav.lat, uav.lng]);
-                        // Fix: The 'setRotationAngle' method is provided by the Leaflet.RotatedMarker plugin
-                        uav.icon.setRotationAngle(Math.random() * 360); // Simulate orientation change
+                        uav.icon.setRotationAngle(Math.random() * 360);
                     } else {
-                        // Fix: The 'rotationAngle' option is used by the Leaflet.RotatedMarker plugin
                         uav.icon = L.marker([uav.lat, uav.lng], { 
                             icon: uavIcon,
-                            rotationAngle: Math.random() * 360 // Initial random orientation
+                            rotationAngle: Math.random() * 360
                         }).addTo(map);
                         uav.icon.bindPopup(`<b>${uav.id}</b><br>Battery: ${uav.battery}%<br>Task: ${uav.task}`);
                     }
                 });
             }
-
-            // Function to draw hotspots on the map
             function drawHotspots() {
                 hotspotsLayer.clearLayers();
                 hotspots.forEach(hotspot => {
@@ -298,25 +241,19 @@
                         .bindPopup(`<b>Hotspot: ${hotspot.id}</b><br>Type: ${hotspot.type}`);
                 });
             }
-            
-            // Function to update the map info panel
             function updateMapInfo() {
                 const center = map.getCenter();
                 const zoom = map.getZoom();
                 document.getElementById('map-center-coords').textContent = `${center.lat.toFixed(4)}, ${center.lng.toFixed(4)}`;
                 document.getElementById('map-zoom-level').textContent = zoom;
             }
-
-            // --- Simulation Logic ---
+            // Simulation Logic using new IIT Ropar data
             function simulateDataUpdates() {
-                // Move UAVs randomly
                 fleet.forEach(uav => {
                     uav.lat += (Math.random() - 0.5) * 0.001;
                     uav.lng += (Math.random() - 0.5) * 0.001;
                     if(uav.battery > 15) uav.battery = (uav.battery - 0.1);
                 });
-
-                // Occasionally generate a new event
                 if (Math.random() < 0.1) {
                     const randomUAV = fleet[Math.floor(Math.random() * fleet.length)];
                     const events = [
@@ -328,45 +265,34 @@
                     randomUAV.task = event.msg.split(' to ')[1] || 'Executing new command';
                     logEvent(event.msg, event.type);
                 }
-                
-                // Occasionally add a new hotspot
                 if (Math.random() < 0.05) {
                     const newHotspot = {
                         id: `H-${String(hotspots.length + 1).padStart(2, '0')}`,
-                        lat: 28.61 + (Math.random() - 0.5) * 0.04,
-                        lng: 77.21 + (Math.random() - 0.5) * 0.04,
-                        type: ['person', 'building'][Math.floor(Math.random() * 2)]
+                        lat: 30.9686 + (Math.random()-0.5)*0.01,
+                        lng: 76.4733 + (Math.random()-0.5)*0.01,
+                        type: ['person','building'][Math.floor(Math.random()*2)]
                     };
                     hotspots.push(newHotspot);
                     drawHotspots();
-                     logEvent(`New '${newHotspot.type}' hotspot ${newHotspot.id} detected.`, 'WARN');
+                    logEvent(`New '${newHotspot.type}' hotspot ${newHotspot.id} detected.`, 'WARN');
                 }
-
-                // Update all UI components
                 updateUAVMarkers();
                 updateUAVStatusPanel();
             }
-
-            // --- Event Listeners ---
             document.getElementById('toggle-flood').addEventListener('change', (e) => {
                 e.target.checked ? map.addLayer(floodLayer) : map.removeLayer(floodLayer);
             });
             document.getElementById('toggle-hotspots').addEventListener('change', (e) => {
                 e.target.checked ? map.addLayer(hotspotsLayer) : map.removeLayer(hotspotsLayer);
             });
-             document.getElementById('toggle-gaps').addEventListener('change', (e) => {
+            document.getElementById('toggle-gaps').addEventListener('change', (e) => {
                 e.target.checked ? map.addLayer(gapsLayer) : map.removeLayer(gapsLayer);
             });
-            
             map.on('move', updateMapInfo);
             map.on('zoom', updateMapInfo);
-
-            // --- Initial Load and Timers ---
             function updateTime() {
                 systemTimeEl.textContent = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
             }
-            
-            // Initial UI draw
             logEvent('GCS Interface Initialized.', 'INFO');
             logEvent('Connecting to UAV fleet...', 'INFO');
             updateUAVStatusPanel();
@@ -374,12 +300,9 @@
             drawHotspots();
             updateMapInfo();
             updateTime();
-
-            // Start simulation loop
-            setInterval(simulateDataUpdates, 2000); // Update every 2 seconds
+            setInterval(simulateDataUpdates, 2000);
             setInterval(updateTime, 1000);
         });
     </script>
 </body>
 </html>
-
