@@ -37,5 +37,9 @@ def autoencoder():
                                 output_image='outputs/'+os.path.basename(output_path))
     return render_template('project_autoencoder.html')
 
+@app.route('/drone')
+def drone():
+    return render_template('project_drone.html')
+
 if __name__=='__main__':
     app.run(debug=True)
