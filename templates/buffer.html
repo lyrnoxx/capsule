@@ -1,4 +1,59 @@
-        <header id="hero" data-module="hero" class="sec hero">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}My ML Projects{% endblock %}</title>
+        <link rel="'stylesheet" href="{{url_for('static', filename='style1.css')}}">
+        <script src="{{ url_for('static', filename='toggle-dark.js') }}"></script>
+    </head>
+    <body>
+        <button class="toggle-dark">🌓</button>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/autoencoder">Denoising Autoencoder</a> |
+            <a href="/reinforce">Cartpole Reinforce</a>
+            <a href="{{ url_for('static', filename='resume/jugal_alan_resume.pdf') }}">Download Resume</a>
+        </nav>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html> 
+ 
+ 
+{% block title %}Denoising Autoencoder{% endblock %}
+<h2>Demo</h2>
+<form method="POST" enctype="multipart/form-data">
+    <label>Upload a grayscale image (28x28 preferred):</label><br>
+    <input type="file" name="image">
+    <input type="submit" value="Denoise">
+</form>
+
+{% if input_image and output_image %}
+<h3>Result:</h3>
+<table>
+  <tr>
+    <td><b>Original</b></td>
+    <td><b>Denoised</b></td>
+  </tr>
+  <tr>
+    <td><img src="{{ url_for('static', filename=input_image) }}" width="150"></td>
+    <td><img src="{{ url_for('static', filename=output_image) }}" width="150"></td>
+  </tr>
+</table>
+{% endif %}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <header id="hero" data-module="hero" class="sec hero">
         <div class="comp">
           <h1 data-hero="title" aria-label="make it mean more with gsap" class="font-c hero-text">
             <span class="main-he-span">MAKE IT MEAN</span><span class="main-he-span">MORE WITH GSAP</span></h1></div>
