@@ -1,7 +1,0 @@
-<Pose> {   'orientation': <Quaternionr> {   'w_val': 0.9791017770767212,
-    'x_val': 0.0,
-    'y_val': -0.0,
-    'z_val': -0.20337092876434326},
-    'position': <Vector3r> {   'x_val': 0.0,
-    'y_val': 0.0,
-    'z_val': -10.29917049407959}}

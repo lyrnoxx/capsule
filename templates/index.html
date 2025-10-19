@@ -147,14 +147,14 @@ let flipAnimation = null
       <!-- <li data-to="scrolltrigger" class="link-li-w">
         <div>Scroll Trigger</div>
       </li> -->
-      <!-- <li data-to="slider" class="link-li-w">
-        <div>Slider</div>
-      </li> -->
       <!-- <li data-to="inertia" class="link-li-w">
         <div>Inertia</div>
       </li> -->
       <!-- <li data-to="text" class="link-li-w"><div>Text Effects</div></li> -->
       <li data-to="marquee" class="link-li-w"><div>Marquee</div></li>
+      <li data-to="slider" class="link-li-w">
+        <div>Escapade</div>
+      </li>
     </ul>
 </div>
 </div>
@@ -279,12 +279,455 @@ addEventListener("GSAPReady", (event) => {
 </section>
 
 
-<!-- <section id="slider" class="sec"><div data-animate="slider" class="comp slider-w"><div class="slider-ctrls-w"><div data-slider="progress" class="slider-progress-w"><div class="progress-bar"></div></div></div><ul data-slider="slides" role="list" class="slides w-list-unstyled"><li class="slide-outer"><div class="slide"><div class="slide-col flex-ve"><div>Precise</div><div class="slide-text-block"><h3 class="font-c size-md">ACTIONS</h3><div>GSAP turns clicks into vivid stories with precise motion, making every interaction feel intentional and alive.</div></div></div><div class="slide-col"><div class="slide-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781b_face-3.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div></div></li><li class="slide-outer"><div class="slide"><div class="slide-col flex-ve"><div>Focus</div><div class="slide-text-block"><h3 class="font-c size-md">ATTENTION</h3><div>GSAP sharpens focus with smooth animations, drawing attention to your message for a lasting, memorable impact.</div></div></div><div class="slide-col"><div class="slide-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781e_face-2.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div></div></li><li class="slide-outer current"><div class="slide"><div class="slide-col flex-ve"><div>Expressive</div><div class="slide-text-block"><h3 class="font-c size-md">Motion</h3><div>GSAP infuses elements with expressive motion, transforming static pages into emotional, engaging journeys.</div></div></div><div class="slide-col"><div class="slide-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781d_face-1.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div></div></li><li class="slide-outer"><div class="slide"><div class="slide-col flex-ve"><div>Powerful</div><div class="slide-text-block"><h3 class="font-c size-md">IMPACT</h3><div>GSAP delivers animations with powerful impact, ensuring your story resonates clearly and leaves a mark.</div></div></div><div class="slide-col"><div class="slide-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781c_face-4.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div></div></li><li class="slide-outer"><div class="slide"><div class="slide-col flex-ve"><div>Seamless</div><div class="slide-text-block"><h3 class="font-c size-md">FLOW</h3><div>GSAP crafts seamless flow in motion, syncing with users to create natural, captivating interactions.</div></div></div><div class="slide-col"><div class="slide-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781f_face-5.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div></div></li></ul><div class="slider-ctrls-w"><button data-slider="prev" class="btn arrow"><div data-wf--u-arrow-button--variant="flip" class="arrow-btn"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow w-variant-352da3df-a236-ccac-dbb8-8845a582a471"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path></svg></div></button><ul data-slider="dots" role="list" class="dots-w w-list-unstyled"><li><button class="btn slider-dot current"></button></li><li><button class="btn slider-dot"></button></li><li><button class="btn slider-dot"></button></li><li><button class="btn slider-dot"></button></li><li><button class="btn slider-dot"></button></li></ul><button data-slider="next" class="btn arrow"><div data-wf--u-arrow-button--variant="base" class="arrow-btn"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path></svg></div></button></div></div><div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Endless by design</div><div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w"><div class="explainer-overflow"><div class="explainer-content-w"><p class="explainer-par">Ideal for smooth marquees, auto playing sliders, and loops that just keep rolling.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c885ad5b6f59e2efe1_slider-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div><div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div><div class="code-block w-embed w-script"><script>
-// https://codepen.io/GreenSock/pen/gOvvJee?editors=1010
-// https://gsap.com/docs/v3/HelperFunctions/helpers/seamlessLoop/
 
-// https://codepen.io/GreenSock/pen/gOvvJee?editors=1010
-// https://gsap.com/docs/v3/HelperFunctions/helpers/seamlessLoop/
+
+<!-- <section id="inertia" data-animate="inertia" class="sec inertia"><div data-inertia="item" class="comp inertia"><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d1_run1.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d2_run2.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d3_run3.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677cf_run4.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d0_run5.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677ce_run6.avif" loading="lazy" alt="" class="img-full"/></div></div><div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Feel the inertia</div><div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w"><div class="explainer-overflow"><div class="explainer-content-w"><p class="explainer-par">Continue movement from a given speed, slow naturally to a stop. Perfect for adding physicality and flow to your interface.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c7ef67f371639c0386_inertia-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div><div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div><div class="code-block w-embed w-script"><script>
+{
+// CREDITS: https://codepen.io/GreenSock/pen/RwLepdQ?editors=1010
+
+addEventListener("GSAPReady", (event) => {
+  // console.log("inertia");
+  const wrapper = document.querySelector("[data-animate='inertia']");
+  const items = [...wrapper.querySelector("[data-inertia='item']").children];
+
+  /** --  Params */
+  let dragDistancePerRotation = 3000;
+  let itemWidth = items[0].offsetWidth; // Get width of the first item
+  let itemCount = items.length;
+  let radius = (itemWidth / (2 * Math.sin(Math.PI / itemCount))) * 0.85; // Dynamic radius
+  const perspective = 5000; // Controls the strength of the perspective effect
+  const proxy = document.createElement("div");
+  const progressWrap = gsap.utils.wrap(0, 1);
+  let startProgress = 0; // Define startProgress variable
+
+  // Set up the perspective on the wrapper
+  gsap.set(wrapper, {
+    perspective: perspective,
+    transformStyle: "preserve-3d",
+  });
+
+  // Set up the container for the rotating items
+  const container = wrapper.querySelector("[data-inertia='item']");
+  gsap.set(container, {
+    transformStyle: "preserve-3d",
+  });
+
+  const spin = gsap.fromTo(
+    items,
+    {
+      rotationY: (i) => (i * 360) / items.length,
+      z: -radius, // Use dynamic radius
+    },
+    {
+      rotationY: "-=360",
+      duration: 20,
+      ease: "none",
+      repeat: -1,
+      transformOrigin: "50% 50% " + -radius + "px",
+      z: -radius, // Maintain the z position throughout the animation
+    }
+  );
+
+  // Set up the proxy element properly
+  proxy.style.position = "absolute";
+  proxy.style.width = "100%";
+  proxy.style.height = "100%";
+  proxy.style.top = "0";
+  proxy.style.left = "0";
+  proxy.style.zIndex = "1";
+  proxy.style.cursor = "grab";
+  wrapper.children[0].appendChild(proxy);
+
+  // Create Draggable with mobile-friendly settings
+  Draggable.create(proxy, {
+    trigger: wrapper,
+    type: "x",
+    inertia: true,
+    // allowNativeTouchScrolling: false, // Changed to false to prevent conflicts
+    onPress() {
+      gsap.killTweensOf(spin);
+      spin.timeScale(0);
+      startProgress = spin.progress();
+    },
+    onDrag: updateRotation,
+    onThrowUpdate: updateRotation,
+    onRelease() {
+      if (!this.tween || !this.tween.isActive()) {
+        gsap.to(spin, { timeScale: 1, duration: 1 });
+      }
+    },
+    onThrowComplete() {
+      gsap.to(spin, { timeScale: 1, duration: 1 });
+    },
+  });
+
+  function updateRotation() {
+    let p = startProgress + (this.startX - this.x) / dragDistancePerRotation;
+    spin.progress(progressWrap(p));
+  }
+
+  function recalculatePositions() {
+    itemWidth = items[0].offsetWidth;
+    itemCount = items.length;
+    radius = (itemWidth / (2 * Math.sin(Math.PI / itemCount))) * 0.8;
+
+    // Update each item's rotationY and z
+    items.forEach((item, i) => {
+      gsap.set(item, {
+        rotationY: (i * 360) / itemCount,
+        z: -radius,
+      });
+    });
+
+    // Update the spin tween's transformOrigin and z
+    spin.vars.transformOrigin = "50% 50% " + -radius + "px";
+    spin.vars.z = -radius;
+    spin.invalidate(); // Re-initialize the tween with new values
+
+    // Update the perspective if needed
+    gsap.set(wrapper, {
+      perspective: perspective,
+    });
+  }
+
+  // Call on resize
+  window.addEventListener("resize", recalculatePositions);
+
+  // Add touch event listeners for better mobile support
+  wrapper.addEventListener(
+    "touchstart",
+    (e) => {
+      // Prevent default only if we're actually dragging
+      if (e.target === wrapper || e.target === proxy) {
+        e.preventDefault();
+      }
+    },
+    { passive: false }
+  );
+});
+
+}
+</script></div></section> -->
+
+<!-- <section id="text" class="sec"><ul role="list" class="comp text-exp w-list-unstyled"><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="chars" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split Chars</div></div></div><div class="text-example-tx-w"><div>Character Split Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".2" data-animate="text" data-type="words" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split By Words</div></div></div><div class="text-example-tx-w"><div>Word Split Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="scramble" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Scramble</div></div></div><div class="text-example-tx-w"><div>Scramble Text Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="alpha" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split Alpha</div></div></div><div class="text-example-tx-w"><div>Alpha Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="side" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">From the Side</div></div></div><div class="text-example-tx-w"><div>SIide Char Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="updown" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Up and Down</div></div></div><div class="text-example-tx-w"><div>Up and down Reveal</div></div></li></ul><div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Split, animate, reveal</div><div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w"><div class="explainer-overflow"><div class="explainer-content-w"><p class="explainer-par">Animate each one independently. It’s all motion, no compromise: screen readers and search engines still see the original text.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c873ab161c8499accd_text-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div><div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div><div class="code-block w-embed w-script"><script>
+{
+
+/** Utility Functions */
+const split = (text, type = "chars") => {
+  text.setAttribute("aria-label", text.textContent);
+  const splits = new SplitText(text, { type });
+  splits[type].forEach((char) => char.setAttribute("aria-hidden", "true"));
+  return splits[type];
+};
+
+const getParams = (item) => {
+  const { duration, delay, stagger, ease, type } = item.dataset;
+  const params = {
+    duration: 1.2,
+    delay: 0,
+    type: "chars",
+  };
+
+  if (duration) params.duration = parseFloat(duration);
+  if (delay) params.delay = parseFloat(delay);
+  if (type && (type === "chars" || type === "words" || type === "lines"))
+    params.type = type;
+
+  return params;
+};
+
+const baseAnimation = (item) => {
+  const params = getParams(item);
+  return {
+    duration: params.duration,
+    delay: params.delay,
+    ease: "expo.out",
+    //   stagger each item so the letters come in one after the other
+    stagger: {
+      each: 0.04,
+      from: "start",
+    },
+    scrollTrigger: {
+      trigger: item,
+      // use scrolltrigger to trigger on enter and reset on exit
+      toggleActions: "play reset play reset",
+    },
+  };
+};
+
+/** (1) Split Reveal Animation */
+function createSplitRevealAnimation(item) {
+  const params = getParams(item); // 1. get params from attributes
+  const text = split(item, params.type); // 2. split the text
+  item.style.overflow = "hidden"; // 3. set container to overflow
+
+  // 4. create the animation
+  return gsap.fromTo(
+    text,
+    { yPercent: 120 },
+    {
+      ...baseAnimation(item),
+      yPercent: 0,
+    }
+  );
+}
+
+function createScrambledAnimation(item) {
+  const text = item.textContent;
+  const randomText = Array(text.length)
+    .fill()
+    .map(() => String.fromCharCode(Math.floor(Math.random() * (90 - 65) + 65)))
+    .join("")
+    .toLowerCase();
+
+  return gsap.fromTo(
+    item.children[0],
+    {
+      scrambleText: randomText,
+    },
+    {
+      ...baseAnimation(item),
+      scrambleText: text,
+      chars: text,
+    }
+  );
+}
+
+function createAlphaAnimation(item) {
+
+  const params = getParams(item); // 1. get params from attributes
+  const text = split(item, "chars"); // 2. split the text
+
+  return gsap.fromTo(
+    text,
+    { autoAlpha: 0 },
+    {
+      ...baseAnimation(item),
+      autoAlpha: 1,
+      stagger: {
+        each: 0.02,
+        from: "random",
+      },
+    }
+  );
+}
+
+function createSideAnimation(item) {
+  const params = getParams(item);
+  const outer = split(item, "chars");
+  outer.forEach((char) => {
+    char.style.overflow = "hidden";
+  });
+  const inner = split(item.children[0], "chars");
+
+  return gsap.fromTo(
+    inner,
+    { x: 100 },
+    {
+      ...baseAnimation(item),
+      x: 0,
+      stagger: {
+        each: 0.02,
+        from: "end",
+      },
+    }
+  );
+}
+
+function createUpDownAnimation(item) {
+  const params = getParams(item);
+  const outer = split(item, "chars");
+  outer.forEach((char) => {
+    char.style.overflow = "hidden";
+  });
+  const inner = split(item.children[0], "chars");
+
+  return gsap.fromTo(
+    inner,
+    {
+      yPercent: (i) => {
+        return i % 2 === 0 ? 100 : -100;
+      },
+    },
+    {
+      ...baseAnimation(item),
+      yPercent: 0,
+      stagger: {
+        each: 0.02,
+        from: "random",
+      },
+    }
+  );
+}
+
+/** Main Text Effect Wrapper */
+addEventListener("GSAPReady", (event) => {
+  const texts = [...document.querySelectorAll('[data-animate="text"]')];
+
+  texts.forEach((item) => {
+    if (item.dataset.type === "chars") createSplitRevealAnimation(item);
+    else if (item.dataset.type === "words") createSplitRevealAnimation(item);
+    else if (item.dataset.type === "scramble") createScrambledAnimation(item);
+    else if (item.dataset.type === "alpha") createAlphaAnimation(item);
+    else if (item.dataset.type === "side") createSideAnimation(item);
+    else if (item.dataset.type === "updown") createUpDownAnimation(item);
+  });
+});
+
+}
+</script></div></section> -->
+
+
+
+<section id="marquee" data-animate="marquee" class="sec"><div class="comp scroller"><div data-marquee="line" class="scroller-line first"><div class="scroller-text">SCROLLTRIGGER</div><div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467815_socks.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text"> MARQUEE</div></div>
+    <div data-marquee="line" class="scroller-line second"><div class="scroller-text"> MARQUEE</div>
+      <div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467814_tomato.avif" loading="eager" alt="" class="dual-img-img"/>
+        <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780d_tomato-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
+      </div></div>
+      <div class="scroller-text">SCROLLTRIGGER</div>
+    </div>
+  </div><!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp">
+          <label class="div"><input type="checkbox" class="input"/>
+            <span class="span"><div class="explainer-he">Marquees forever</div>
+              <div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w">
+                <div class="explainer-overflow"><div class="explainer-content-w">
+            <p class="explainer-par">Loop endlessly. Stack images, text, or both. Marquees give rhythm to your page without needing a single click.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c7bd787427ed9cbaa8_marquee-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div>
+            <div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div> -->
+  <div class="code-block w-embed w-script">
+  <script>
+addEventListener("GSAPReady", (event) => {
+  // console.log("marquee");
+  const wrapper = document.querySelector("[data-animate='marquee']");
+  if (!wrapper) return;
+
+  const sections = [...wrapper.querySelectorAll("[data-marquee='line']")];
+
+  gsap.fromTo(
+    sections,
+    {
+      x: (i) =>
+        i % 2 === 0
+          ? sections[i].offsetWidth / 4
+          : -sections[i].offsetWidth / 4,
+    },
+    {
+      x: (i) =>
+        i % 2 === 0
+          ? -sections[i].offsetWidth / 4
+          : sections[i].offsetWidth / 4,
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        // invalidateOnRefresh: true,
+      },
+    }
+  );
+});
+
+  </script>
+  </div>
+</section>
+
+
+
+<section id="slider" class="sec">
+  <div data-animate="slider" class="comp slider-w">
+    <div class="slider-ctrls-w">
+      <div data-slider="progress" class="slider-progress-w">
+        <div class="progress-bar">
+        </div>
+      </div>
+    </div>
+    <ul data-slider="slides" role="list" class="slides w-list-unstyled">
+      <li class="slide-outer"><div class="slide">
+        <div class="slide-col flex-ve">
+          <div>Precise</div><div class="slide-text-block">
+            <h3 class="font-c size-md">ACTIONS</h3>
+            <div>GSAP turns clicks into vivid stories with precise motion, making every interaction feel intentional and alive.</div>
+          </div>
+        </div>
+        <div class="slide-col">
+          <div class="slide-img">
+            <div class="dual-img">
+              <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781b_face-3.avif" loading="eager" alt="" class="dual-img-img"/>
+              <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="slide-outer"><div class="slide">
+      <div class="slide-col flex-ve">
+        <div>still</div><div class="slide-text-block">
+          <h3 class="font-c size-md">Service staff at Coffee shop</h3>
+          <div>adding here soon.</div></div></div>
+          <div class="slide-col"><div class="slide-img"><div class="dual-img">
+            <img src="{{ url_for('static', filename='images/tea-stall.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+            <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781e_face-2.avif" loading="eager" alt="" class="dual-img-img"/>
+            <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+          </div></div></div></div>
+          </li>
+          <li class="slide-outer current">
+              <div class="slide">
+              <div class="slide-col flex-ve"><div>2020</div><div class="slide-text-block">
+                <h3 class="font-c size-md">Flipkart Delivery Agent</h3>
+                <div>More here later</div>
+              </div>
+            </div>
+            <div class="slide-col"><div class="slide-img">
+              <div class="dual-img">
+                <img src="{{ url_for('static', filename='images/delivery.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781d_face-1.avif" loading="eager" alt="" class="dual-img-img"/>
+                <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+              </div>
+            </div>
+              </div>
+            </div>
+          </li>
+          <li class="slide-outer"><div class="slide">
+                  <div class="slide-col flex-ve"><div>2023</div><div class="slide-text-block">
+                    <h3 class="font-c size-md">Web Advisor at Hostgator</h3><div>Will fill soon.</div></div></div>
+                    <div class="slide-col"><div class="slide-img"><div class="dual-img">
+                      <img src="{{ url_for('static', filename='images/web-advisor.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                      <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781c_face-4.avif" loading="eager" alt="" class="dual-img-img"/>
+                      <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+                    </div></div></div></div></li>
+                      <li class="slide-outer"><div class="slide"><div class="slide-col flex-ve">
+                        <div>2025</div><div class="slide-text-block">
+                          <h3 class="font-c size-md">Teaching Assistant at IIT Ropar</h3>
+                          <div>will add more about this post here.</div>
+                        </div></div><div class="slide-col"><div class="slide-img"><div class="dual-img">
+                          <img src="{{ url_for('static', filename='images/ta.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                          <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781f_face-5.avif" loading="eager" alt="" class="dual-img-img"/>
+                          <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+                        </div></div></div></div></li></ul><div class="slider-ctrls-w"><button data-slider="prev" class="btn arrow"><div data-wf--u-arrow-button--variant="flip" class="arrow-btn">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow w-variant-352da3df-a236-ccac-dbb8-8845a582a471"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path>
+                          </svg></div></button><ul data-slider="dots" role="list" class="dots-w w-list-unstyled">
+                            <li><button class="btn slider-dot current"></button></li><li><button class="btn slider-dot">
+                            </button></li><li>
+                              <button class="btn slider-dot"></button></li><li>
+                                <button class="btn slider-dot"></button></li><li>
+                                  <button class="btn slider-dot"></button></li></ul>
+                                  <button data-slider="next" class="btn arrow">
+                                    <div data-wf--u-arrow-button--variant="base" class="arrow-btn">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path></svg></div></button></div></div>
+                                        <!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Endless by design</div><div class="plus-icon-w"><div class="plus-line rotate"></div>
+                                          <div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w">
+                                            <div class="explainer-overflow"><div class="explainer-content-w">
+                                              <p class="explainer-par">Ideal for smooth marquees, auto playing sliders, and loops that just keep rolling.</p>
+                                            </div></div></div><div class="explainer-copy-btn-w">
+                                              <button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c885ad5b6f59e2efe1_slider-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon">
+                                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path>
+                                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div>
+                                                  <div class="mobile-explainer-prompt">Copy this on Desktop</div></div>
+                                                </div> -->
+<div class="code-block w-embed w-script">
+  
+<script>
 
 function horizontalLoop(items, config) {
   let timeline;
@@ -585,13 +1028,11 @@ function horizontalLoop(items, config) {
   });
   return timeline;
 }
-
 /* -- Global Params */
 const sliderParams = {
   duration: 0.5,
   ease: "power2.out",
 };
-
 addEventListener("GSAPReady", (event) => {
   const wrapper = document.querySelector("[data-animate='slider']");
   const slides = [...wrapper.querySelector("[data-slider='slides']").children];
@@ -658,349 +1099,9 @@ addEventListener("GSAPReady", (event) => {
     loop.previous(sliderParams);
   });
 });
-
-</script></div></section> -->
-
-<!-- <section id="inertia" data-animate="inertia" class="sec inertia"><div data-inertia="item" class="comp inertia"><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d1_run1.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d2_run2.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d3_run3.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677cf_run4.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677d0_run5.avif" loading="lazy" alt="" class="img-full"/></div><div class="inertia-slide"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac34677ce_run6.avif" loading="lazy" alt="" class="img-full"/></div></div><div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Feel the inertia</div><div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w"><div class="explainer-overflow"><div class="explainer-content-w"><p class="explainer-par">Continue movement from a given speed, slow naturally to a stop. Perfect for adding physicality and flow to your interface.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c7ef67f371639c0386_inertia-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div><div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div><div class="code-block w-embed w-script"><script>
-{
-// CREDITS: https://codepen.io/GreenSock/pen/RwLepdQ?editors=1010
-
-addEventListener("GSAPReady", (event) => {
-  // console.log("inertia");
-  const wrapper = document.querySelector("[data-animate='inertia']");
-  const items = [...wrapper.querySelector("[data-inertia='item']").children];
-
-  /** --  Params */
-  let dragDistancePerRotation = 3000;
-  let itemWidth = items[0].offsetWidth; // Get width of the first item
-  let itemCount = items.length;
-  let radius = (itemWidth / (2 * Math.sin(Math.PI / itemCount))) * 0.85; // Dynamic radius
-  const perspective = 5000; // Controls the strength of the perspective effect
-  const proxy = document.createElement("div");
-  const progressWrap = gsap.utils.wrap(0, 1);
-  let startProgress = 0; // Define startProgress variable
-
-  // Set up the perspective on the wrapper
-  gsap.set(wrapper, {
-    perspective: perspective,
-    transformStyle: "preserve-3d",
-  });
-
-  // Set up the container for the rotating items
-  const container = wrapper.querySelector("[data-inertia='item']");
-  gsap.set(container, {
-    transformStyle: "preserve-3d",
-  });
-
-  const spin = gsap.fromTo(
-    items,
-    {
-      rotationY: (i) => (i * 360) / items.length,
-      z: -radius, // Use dynamic radius
-    },
-    {
-      rotationY: "-=360",
-      duration: 20,
-      ease: "none",
-      repeat: -1,
-      transformOrigin: "50% 50% " + -radius + "px",
-      z: -radius, // Maintain the z position throughout the animation
-    }
-  );
-
-  // Set up the proxy element properly
-  proxy.style.position = "absolute";
-  proxy.style.width = "100%";
-  proxy.style.height = "100%";
-  proxy.style.top = "0";
-  proxy.style.left = "0";
-  proxy.style.zIndex = "1";
-  proxy.style.cursor = "grab";
-  wrapper.children[0].appendChild(proxy);
-
-  // Create Draggable with mobile-friendly settings
-  Draggable.create(proxy, {
-    trigger: wrapper,
-    type: "x",
-    inertia: true,
-    // allowNativeTouchScrolling: false, // Changed to false to prevent conflicts
-    onPress() {
-      gsap.killTweensOf(spin);
-      spin.timeScale(0);
-      startProgress = spin.progress();
-    },
-    onDrag: updateRotation,
-    onThrowUpdate: updateRotation,
-    onRelease() {
-      if (!this.tween || !this.tween.isActive()) {
-        gsap.to(spin, { timeScale: 1, duration: 1 });
-      }
-    },
-    onThrowComplete() {
-      gsap.to(spin, { timeScale: 1, duration: 1 });
-    },
-  });
-
-  function updateRotation() {
-    let p = startProgress + (this.startX - this.x) / dragDistancePerRotation;
-    spin.progress(progressWrap(p));
-  }
-
-  function recalculatePositions() {
-    itemWidth = items[0].offsetWidth;
-    itemCount = items.length;
-    radius = (itemWidth / (2 * Math.sin(Math.PI / itemCount))) * 0.8;
-
-    // Update each item's rotationY and z
-    items.forEach((item, i) => {
-      gsap.set(item, {
-        rotationY: (i * 360) / itemCount,
-        z: -radius,
-      });
-    });
-
-    // Update the spin tween's transformOrigin and z
-    spin.vars.transformOrigin = "50% 50% " + -radius + "px";
-    spin.vars.z = -radius;
-    spin.invalidate(); // Re-initialize the tween with new values
-
-    // Update the perspective if needed
-    gsap.set(wrapper, {
-      perspective: perspective,
-    });
-  }
-
-  // Call on resize
-  window.addEventListener("resize", recalculatePositions);
-
-  // Add touch event listeners for better mobile support
-  wrapper.addEventListener(
-    "touchstart",
-    (e) => {
-      // Prevent default only if we're actually dragging
-      if (e.target === wrapper || e.target === proxy) {
-        e.preventDefault();
-      }
-    },
-    { passive: false }
-  );
-});
-
-}
-</script></div></section> -->
-
-<!-- <section id="text" class="sec"><ul role="list" class="comp text-exp w-list-unstyled"><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="chars" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split Chars</div></div></div><div class="text-example-tx-w"><div>Character Split Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".2" data-animate="text" data-type="words" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split By Words</div></div></div><div class="text-example-tx-w"><div>Word Split Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="scramble" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Scramble</div></div></div><div class="text-example-tx-w"><div>Scramble Text Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="alpha" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Split Alpha</div></div></div><div class="text-example-tx-w"><div>Alpha Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="side" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">From the Side</div></div></div><div class="text-example-tx-w"><div>SIide Char Reveal</div></div></li><li class="text-g-item"><div class="text-example-container"><div data-delay=".1" data-animate="text" data-type="updown" data-duration="1.2" class="text-effect-w"><div class="text-effect-tx">Up and Down</div></div></div><div class="text-example-tx-w"><div>Up and down Reveal</div></div></li></ul><div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Split, animate, reveal</div><div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w"><div class="explainer-overflow"><div class="explainer-content-w"><p class="explainer-par">Animate each one independently. It’s all motion, no compromise: screen readers and search engines still see the original text.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c873ab161c8499accd_text-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div><div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div><div class="code-block w-embed w-script"><script>
-{
-
-/** Utility Functions */
-const split = (text, type = "chars") => {
-  text.setAttribute("aria-label", text.textContent);
-  const splits = new SplitText(text, { type });
-  splits[type].forEach((char) => char.setAttribute("aria-hidden", "true"));
-  return splits[type];
-};
-
-const getParams = (item) => {
-  const { duration, delay, stagger, ease, type } = item.dataset;
-  const params = {
-    duration: 1.2,
-    delay: 0,
-    type: "chars",
-  };
-
-  if (duration) params.duration = parseFloat(duration);
-  if (delay) params.delay = parseFloat(delay);
-  if (type && (type === "chars" || type === "words" || type === "lines"))
-    params.type = type;
-
-  return params;
-};
-
-const baseAnimation = (item) => {
-  const params = getParams(item);
-  return {
-    duration: params.duration,
-    delay: params.delay,
-    ease: "expo.out",
-    //   stagger each item so the letters come in one after the other
-    stagger: {
-      each: 0.04,
-      from: "start",
-    },
-    scrollTrigger: {
-      trigger: item,
-      // use scrolltrigger to trigger on enter and reset on exit
-      toggleActions: "play reset play reset",
-    },
-  };
-};
-
-/** (1) Split Reveal Animation */
-function createSplitRevealAnimation(item) {
-  const params = getParams(item); // 1. get params from attributes
-  const text = split(item, params.type); // 2. split the text
-  item.style.overflow = "hidden"; // 3. set container to overflow
-
-  // 4. create the animation
-  return gsap.fromTo(
-    text,
-    { yPercent: 120 },
-    {
-      ...baseAnimation(item),
-      yPercent: 0,
-    }
-  );
-}
-
-function createScrambledAnimation(item) {
-  const text = item.textContent;
-  const randomText = Array(text.length)
-    .fill()
-    .map(() => String.fromCharCode(Math.floor(Math.random() * (90 - 65) + 65)))
-    .join("")
-    .toLowerCase();
-
-  return gsap.fromTo(
-    item.children[0],
-    {
-      scrambleText: randomText,
-    },
-    {
-      ...baseAnimation(item),
-      scrambleText: text,
-      chars: text,
-    }
-  );
-}
-
-function createAlphaAnimation(item) {
-
-  const params = getParams(item); // 1. get params from attributes
-  const text = split(item, "chars"); // 2. split the text
-
-  return gsap.fromTo(
-    text,
-    { autoAlpha: 0 },
-    {
-      ...baseAnimation(item),
-      autoAlpha: 1,
-      stagger: {
-        each: 0.02,
-        from: "random",
-      },
-    }
-  );
-}
-
-function createSideAnimation(item) {
-  const params = getParams(item);
-  const outer = split(item, "chars");
-  outer.forEach((char) => {
-    char.style.overflow = "hidden";
-  });
-  const inner = split(item.children[0], "chars");
-
-  return gsap.fromTo(
-    inner,
-    { x: 100 },
-    {
-      ...baseAnimation(item),
-      x: 0,
-      stagger: {
-        each: 0.02,
-        from: "end",
-      },
-    }
-  );
-}
-
-function createUpDownAnimation(item) {
-  const params = getParams(item);
-  const outer = split(item, "chars");
-  outer.forEach((char) => {
-    char.style.overflow = "hidden";
-  });
-  const inner = split(item.children[0], "chars");
-
-  return gsap.fromTo(
-    inner,
-    {
-      yPercent: (i) => {
-        return i % 2 === 0 ? 100 : -100;
-      },
-    },
-    {
-      ...baseAnimation(item),
-      yPercent: 0,
-      stagger: {
-        each: 0.02,
-        from: "random",
-      },
-    }
-  );
-}
-
-/** Main Text Effect Wrapper */
-addEventListener("GSAPReady", (event) => {
-  const texts = [...document.querySelectorAll('[data-animate="text"]')];
-
-  texts.forEach((item) => {
-    if (item.dataset.type === "chars") createSplitRevealAnimation(item);
-    else if (item.dataset.type === "words") createSplitRevealAnimation(item);
-    else if (item.dataset.type === "scramble") createScrambledAnimation(item);
-    else if (item.dataset.type === "alpha") createAlphaAnimation(item);
-    else if (item.dataset.type === "side") createSideAnimation(item);
-    else if (item.dataset.type === "updown") createUpDownAnimation(item);
-  });
-});
-
-}
-</script></div></section> -->
-
-<section id="marquee" data-animate="marquee" class="sec"><div class="comp scroller"><div data-marquee="line" class="scroller-line first"><div class="scroller-text">SCROLLTRIGGER</div><div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467815_socks.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text"> MARQUEE</div></div>
-  <div data-marquee="line" class="scroller-line second"><div class="scroller-text"> MARQUEE</div>
-  <div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467814_tomato.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780d_tomato-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text">SCROLLTRIGGER</div></div></div>
-  <!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp">
-  <label class="div"><input type="checkbox" class="input"/>
-    <span class="span"><div class="explainer-he">Marquees forever</div>
-      <div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w">
-        <div class="explainer-overflow"><div class="explainer-content-w">
-  <p class="explainer-par">Loop endlessly. Stack images, text, or both. Marquees give rhythm to your page without needing a single click.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c7bd787427ed9cbaa8_marquee-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div>
-  <div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div> -->
-  <div class="code-block w-embed w-script">
-  <script>
-addEventListener("GSAPReady", (event) => {
-  // console.log("marquee");
-  const wrapper = document.querySelector("[data-animate='marquee']");
-  if (!wrapper) return;
-
-  const sections = [...wrapper.querySelectorAll("[data-marquee='line']")];
-
-  gsap.fromTo(
-    sections,
-    {
-      x: (i) =>
-        i % 2 === 0
-          ? sections[i].offsetWidth / 4
-          : -sections[i].offsetWidth / 4,
-    },
-    {
-      x: (i) =>
-        i % 2 === 0
-          ? -sections[i].offsetWidth / 4
-          : sections[i].offsetWidth / 4,
-      scrollTrigger: {
-        trigger: wrapper,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-        // invalidateOnRefresh: true,
-      },
-    }
-  );
-});
-
-  </script></div>
+</script>
+</div>
 </section>
+
 
 {% endblock %}
