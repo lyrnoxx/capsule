@@ -151,7 +151,7 @@ let flipAnimation = null
         <div>Inertia</div>
       </li> -->
       <!-- <li data-to="text" class="link-li-w"><div>Text Effects</div></li> -->
-      <li data-to="marquee" class="link-li-w"><div>Marquee</div></li>
+      <!-- <li data-to="marquee" class="link-li-w"><div>Marquee</div></li> -->
       <li data-to="slider" class="link-li-w">
         <div>Escapade</div>
       </li>
@@ -187,7 +187,7 @@ let flipAnimation = null
           </a>
         </li>
         <li>
-          <a href="{{ url_for('drone') }}" class="flip-item-link" style="text-decoration: none;">
+          <a href="{{ url_for('drone') }}" class="flip-item-link" style="text-decoration: none;" target="_blank">
           <div class="flip-item is-2"><div class="item-num">02</div>
           <h3 class="font-c size-md _w-ch">MTP Drone</h3>
           <div class="abs-img">
@@ -213,13 +213,13 @@ let flipAnimation = null
         </li>
         <li>
           <div class="flip-item is-4"><div class="item-num">04</div>
-          <h3 class="font-c size-md _w-ch">aaah</h3>
+          <h3 class="font-c size-md _w-ch">TODO</h3>
           <div class="abs-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780f_socks.avif" loading="eager" alt="" class="dual-img-img"/>
           <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div>
         </li>
         <li>
           <div class="flip-item is-5"><div class="item-num">05</div>
-          <h3 class="font-c size-md _w-ch">haa</h3>
+          <h3 class="font-c size-md _w-ch">TODO</h3>
           <div class="abs-img"><div class="dual-img">
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467812_headphones.avif" loading="eager" alt="" class="dual-img-img"/>
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467809_headphones-shadows.avif" loading="eager" alt="" class="dual-img-shadow"/>
@@ -227,7 +227,7 @@ let flipAnimation = null
         </li>
         <li>
           <div class="flip-item is-6"><div class="item-num">06</div>
-          <h3 class="font-c size-md _w-ch">Mmmmmm</h3>
+          <h3 class="font-c size-md _w-ch">TODO</h3>
           <div class="abs-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467814_tomato.avif" loading="eager" alt="" class="dual-img-img"/>
           <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780d_tomato-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
           </div></div></div>
@@ -579,20 +579,21 @@ addEventListener("GSAPReady", (event) => {
 
 
 
-<section id="marquee" data-animate="marquee" class="sec"><div class="comp scroller"><div data-marquee="line" class="scroller-line first"><div class="scroller-text">SCROLLTRIGGER</div><div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467815_socks.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text"> MARQUEE</div></div>
+<!-- <section id="marquee" data-animate="marquee" class="sec"><div class="comp scroller"><div data-marquee="line" class="scroller-line first"><div class="scroller-text">SCROLLTRIGGER</div><div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467815_socks.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text"> MARQUEE</div></div>
     <div data-marquee="line" class="scroller-line second"><div class="scroller-text"> MARQUEE</div>
       <div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467814_tomato.avif" loading="eager" alt="" class="dual-img-img"/>
         <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780d_tomato-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
       </div></div>
       <div class="scroller-text">SCROLLTRIGGER</div>
     </div>
-  </div><!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp">
+  </div>
+  <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp">
           <label class="div"><input type="checkbox" class="input"/>
             <span class="span"><div class="explainer-he">Marquees forever</div>
               <div class="plus-icon-w"><div class="plus-line rotate"></div><div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w">
                 <div class="explainer-overflow"><div class="explainer-content-w">
             <p class="explainer-par">Loop endlessly. Stack images, text, or both. Marquees give rhythm to your page without needing a single click.</p></div></div></div><div class="explainer-copy-btn-w"><button data-module="copybtn" data-copy="https://cdn.prod.website-files.com/67fea42b19018db93e3fe132/6811e2c7bd787427ed9cbaa8_marquee-final.json.txt" class="btn copy"><div class="btn-cent-w"><div class="text-block">Copy this</div><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 9 11" fill="none" class="svg copy-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1.5H1V6.5H5V1.5ZM0 0.5V7.5H6V0.5H0Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M3 8.757V10.5H9V3.5H7.42V4.5H8V9.5H4V8.757H3Z" fill="currentColor"></path></svg></div></button></div>
-            <div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div> -->
+            <div class="mobile-explainer-prompt">Copy this on Desktop</div></div></div>
   <div class="code-block w-embed w-script">
   <script>
 addEventListener("GSAPReady", (event) => {
@@ -628,7 +629,7 @@ addEventListener("GSAPReady", (event) => {
 
   </script>
   </div>
-</section>
+</section> -->
 
 
 
@@ -641,35 +642,18 @@ addEventListener("GSAPReady", (event) => {
       </div>
     </div>
     <ul data-slider="slides" role="list" class="slides w-list-unstyled">
-      <li class="slide-outer"><div class="slide">
-        <div class="slide-col flex-ve">
-          <div>Precise</div><div class="slide-text-block">
-            <h3 class="font-c size-md">ACTIONS</h3>
-            <div>GSAP turns clicks into vivid stories with precise motion, making every interaction feel intentional and alive.</div>
-          </div>
-        </div>
-        <div class="slide-col">
-          <div class="slide-img">
-            <div class="dual-img">
-              <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781b_face-3.avif" loading="eager" alt="" class="dual-img-img"/>
-              <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
     <li class="slide-outer"><div class="slide">
       <div class="slide-col flex-ve">
         <div>still</div><div class="slide-text-block">
           <h3 class="font-c size-md">Service staff at Coffee shop</h3>
-          <div>adding here soon.</div></div></div>
+          <div>Family business. will be adding more here soon.</div></div></div>
           <div class="slide-col"><div class="slide-img"><div class="dual-img">
             <img src="{{ url_for('static', filename='images/tea-stall.svg') }}" loading="eager" alt="" class="dual-img-img"/>
             <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781e_face-2.avif" loading="eager" alt="" class="dual-img-img"/>
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
           </div></div></div></div>
           </li>
-          <li class="slide-outer current">
+          <li class="slide-outer">
               <div class="slide">
               <div class="slide-col flex-ve"><div>2020</div><div class="slide-text-block">
                 <h3 class="font-c size-md">Flipkart Delivery Agent</h3>
@@ -686,7 +670,7 @@ addEventListener("GSAPReady", (event) => {
               </div>
             </div>
           </li>
-          <li class="slide-outer"><div class="slide">
+          <li class="slide-outer current"><div class="slide">
                   <div class="slide-col flex-ve"><div>2023</div><div class="slide-text-block">
                     <h3 class="font-c size-md">Web Advisor at Hostgator</h3><div>Will fill soon.</div></div></div>
                     <div class="slide-col"><div class="slide-img"><div class="dual-img">
@@ -702,19 +686,43 @@ addEventListener("GSAPReady", (event) => {
                           <img src="{{ url_for('static', filename='images/ta.svg') }}" loading="eager" alt="" class="dual-img-img"/>
                           <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781f_face-5.avif" loading="eager" alt="" class="dual-img-img"/>
                           <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
-                        </div></div></div></div></li></ul><div class="slider-ctrls-w"><button data-slider="prev" class="btn arrow"><div data-wf--u-arrow-button--variant="flip" class="arrow-btn">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow w-variant-352da3df-a236-ccac-dbb8-8845a582a471"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path>
-                          </svg></div></button><ul data-slider="dots" role="list" class="dots-w w-list-unstyled">
-                            <li><button class="btn slider-dot current"></button></li><li><button class="btn slider-dot">
-                            </button></li><li>
-                              <button class="btn slider-dot"></button></li><li>
-                                <button class="btn slider-dot"></button></li><li>
-                                  <button class="btn slider-dot"></button></li></ul>
-                                  <button data-slider="next" class="btn arrow">
-                                    <div data-wf--u-arrow-button--variant="base" class="arrow-btn">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path></svg></div></button></div></div>
-                                        <!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Endless by design</div><div class="plus-icon-w"><div class="plus-line rotate"></div>
+                        </div>
+                      </div>
+                      </div>
+                      </div>
+                      </li>
+                      <li class="slide-outer"><div class="slide">
+                        <div class="slide-col flex-ve">
+                          <div>2026</div><div class="slide-text-block">
+                            <h3 class="font-c size-md">Onwards and beyond.</h3>
+                            <div>.</div>
+                          </div>
+                        </div>
+                        <div class="slide-col">
+                          <div class="slide-img">
+                            <div class="dual-img">
+                              <img src="{{ url_for('static', filename='images/space-404.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                              <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781b_face-3.avif" loading="eager" alt="" class="dual-img-img"/>
+                              <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                <div class="slider-ctrls-w"><button data-slider="prev" class="btn arrow"><div data-wf--u-arrow-button--variant="flip" class="arrow-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow w-variant-352da3df-a236-ccac-dbb8-8845a582a471"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path>
+        </svg></div></button><ul data-slider="dots" role="list" class="dots-w w-list-unstyled">
+          <li><button class="btn slider-dot current"></button></li><li><button class="btn slider-dot">
+          </button></li><li>
+            <button class="btn slider-dot"></button></li><li>
+              <button class="btn slider-dot"></button></li><li>
+                <button class="btn slider-dot"></button></li></ul>
+                <button data-slider="next" class="btn arrow">
+                  <div data-wf--u-arrow-button--variant="base" class="arrow-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 26 16" fill="none" class="svg arrow">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M19.3431 0.929124L25.7071 7.29308C26.0976 7.68361 26.0976 8.31677 25.7071 8.7073L19.3431 15.0713C18.9526 15.4618 18.3195 15.4618 17.9289 15.0713C17.5384 14.6807 17.5384 14.0476 17.9289 13.657L22.5858 9.00019H1C0.447715 9.00019 0 8.55248 0 8.00019C0 7.44791 0.447715 7.00019 1 7.00019H22.5858L17.9289 2.34334C17.5384 1.95281 17.5384 1.31965 17.9289 0.929124C18.3195 0.538599 18.9526 0.538599 19.3431 0.929124Z" fill="currentColor"></path></svg></div></button></div></div>
+                      <!-- <div class="explainer-w"><div data-module="explainer" data-css="explainer" class="explainer-comp"><label class="div"><input type="checkbox" class="input"/><span class="span"><div class="explainer-he">Endless by design</div><div class="plus-icon-w"><div class="plus-line rotate"></div>
                                           <div class="plus-line"></div></div></span></label><div data-css="" class="explainer-expandable-w">
                                             <div class="explainer-overflow"><div class="explainer-content-w">
                                               <p class="explainer-par">Ideal for smooth marquees, auto playing sliders, and loops that just keep rolling.</p>
