@@ -64,31 +64,38 @@ def cleanup_temp_dir(dir_path):
             print(f"ERROR: Failed to delete temporary directory {dir_path}: {e}")
 
 def run_docker_command(temp_dir_path):
+
+    temp_dir_path = os.path.normpath(os.path.abspath(temp_dir_path))
+
     command = [
         'docker', 'run', '--rm',
-        '-v', f'root/{temp_dir_path}/:/data',
+        '-v', f'{temp_dir_path}/:/data',
         'map2dfusion', 'DataPath=/data',
         'Win3D.Enable=0', 'ShouldStop=1',
         'Map.File2Save=/data/output.png'
     ]
 
-    
-    print(f"INFO: Simulating Docker Command: {' '.join(command)}")
+    print(f"INFO: Executing Docker Command: {' '.join(command)}")
     
     try:
-        result = subprocess.run(command, capture_output=True, text=True, check=True)
-        print(f"Docker Output:\n{result.stdout}")
+        result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=120)
+        print(f"Docker Output (stdout):\n{result.stdout}")
         
-        output_file_path = os.path.join(temp_dir_path, 'output.png')
-            
-        print("SUCCESS: Docker execution simulated and output created.")
+        print("SUCCESS: Docker execution finished.")
         return True, "Processing successful."
 
     except subprocess.CalledProcessError as e:
-        return False, f"Docker command failed: {e.stderr}"
+        print(f"ERROR: Docker command failed. Stderr:\n{e.stderr}")
+        return False, f"Docker command failed with exit code {e.returncode}. Stderr: {e.stderr}"
+    except FileNotFoundError:
+        print("ERROR: Docker command not found. Execution environment issue.")
+        return False, "Docker command not found. Verify Docker installation and PATH environment variable."
+    except subprocess.TimeoutExpired:
+        print("ERROR: Docker command timed out after 120 seconds.")
+        return False, "The map stitching process timed out after 120 seconds. It may require more resources."
     except Exception as e:
-        return False, f"An unexpected error occurred during Docker execution: {e}"
-
+        print(f"UNEXPECTED ERROR: {e}")
+        return False, f"An unexpected error occurred during Docker execution. Check volume mount permissions: {e}"
 
 @app.route('/drone/stitch', methods=['GET', 'POST'])
 def drone_stitch():
@@ -138,30 +145,41 @@ def drone_stitch():
 
             if not success:
                 return jsonify({'success': False, 'error': message}), 500
+            
 
-            # 6. Serve Result
-            # SIMULATION: Assuming the Docker command successfully created the map 
-            # named 'stitched_map.png' in the temp_dir. 
+            source_file_name = 'output.png'
+            source_path = os.path.join(temp_dir, source_file_name)
             
-            # In a real app, you would move this file to a permanent static location 
-            # and return the URL to that permanent location. 
-            # For simulation, we return a placeholder URL based on the parameters.
+            final_map_filename = f"map_{uuid.uuid4()}.png"
+            destination_path = os.path.join(app.config['OUTPUT_FOLDER'], final_map_filename)
             
-            #simulated_image_url = f"https://placehold.co/{width}x{height}/10b981/ffffff?text=Map+ID:{os.path.basename(temp_dir)}"
-            #result_image_url = 
+            if os.path.exists(source_path):
+                shutil.move(source_path, destination_path)
+                
+                final_image_url = f"outputs/{final_map_filename}"
+                print(f"SUCCESS: Moved output file to {final_image_url}")
+            else:
+                print("ERROR: Docker command finished successfully but output.png was not found in the volume mount.")
+                return jsonify({
+                    'success': False, 
+                    'error': 'Docker process finished, but the output file (output.png) was not found in the expected location.'
+                }), 500
 
             return jsonify({
                 'success': True, 
-                'imageUrl': "nah",
-                'message': 'Stitching complete. Files deleted.'
+                'imageUrl': final_image_url,
+                'message': 'Stitching complete. Map saved.'
             }), 200
 
         except Exception as e:
             print(f"PROCESSING ERROR: {e}")
-            return jsonify({'success': False, 'error': str(e)}), 500
+            # Differentiate error types
+            status_code = 400 if isinstance(e, ValueError) else 500
+            return jsonify({'success': False, 'error': str(e)}), status_code
             
-        # finally:
-        #     cleanup_temp_dir(temp_dir)
+        finally:
+            cleanup_temp_dir(temp_dir)
+            
     
     return render_template('project_drone-stitch.html')
 
