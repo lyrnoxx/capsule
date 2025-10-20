@@ -63,8 +63,6 @@ def cleanup_temp_dir(dir_path):
 
 def run_docker_command(temp_dir_path):
 
-    temp_dir_path = os.path.normpath(os.path.abspath(temp_dir_path))
-
     command = [
         'docker', 'run', '--rm',
         '-v', f'{temp_dir_path}/:/data',
