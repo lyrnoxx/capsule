@@ -15,6 +15,8 @@ OUTPUT_FOLDER = 'static/outputs'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
+app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024 
+
 @app.route('/')
 def home():
     return render_template('index.html')
