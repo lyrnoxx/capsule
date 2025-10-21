@@ -173,8 +173,8 @@ def drone_stitch():
             status_code = 400 if isinstance(e, ValueError) else 500
             return jsonify({'success': False, 'error': str(e)}), status_code
             
-        finally:
-            cleanup_temp_dir(temp_dir)
+        # finally:
+        #     cleanup_temp_dir(temp_dir)
             
     
     return render_template('project_drone-stitch.html')
