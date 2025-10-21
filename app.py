@@ -160,11 +160,19 @@ def drone_stitch():
                 'message': 'Stitching complete. Map saved.'
             }), 200
 
+        # except Exception as e:
+        #     print(f"PROCESSING ERROR: {e}")
+        #     # Differentiate error types
+        #     status_code = 400 if isinstance(e, ValueError) else 500
+        #     return jsonify({'success': False, 'error': str(e)}), status_code
+        
         except Exception as e:
-            print(f"PROCESSING ERROR: {e}")
-            # Differentiate error types
+            import traceback
+            error_trace = traceback.format_exc()
+            print("FULL TRACEBACK:\n", error_trace)
             status_code = 400 if isinstance(e, ValueError) else 500
-            return jsonify({'success': False, 'error': str(e)}), status_code
+            return jsonify({'success': False, 'error': str(e), 'trace': error_trace}), status_code
+
             
         # finally:
         #     cleanup_temp_dir(temp_dir)
