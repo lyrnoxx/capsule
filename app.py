@@ -62,7 +62,7 @@ def cleanup_temp_dir(dir_path):
             print(f"ERROR: Failed to delete temporary directory {dir_path}: {e}")
 
 def run_docker_command(temp_dir_path):
-
+    temp_dir_path = os.path.normpath(os.path.abspath(temp_dir_path))
     command = [
         'docker', 'run', '--rm',
         '-v', f'{temp_dir_path}:/data',
@@ -72,26 +72,19 @@ def run_docker_command(temp_dir_path):
     ]
 
     print(f"INFO: Executing Docker Command: {' '.join(command)}")
-    
+
     try:
-        result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=120)
-        print(f"Docker Output (stdout):\n{result.stdout}")
-        
-        print("SUCCESS: Docker execution finished.")
-        return True, "Processing successful."
+        result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=180)
+        print("Docker STDOUT:\n", result.stdout)
+        print("Docker STDERR:\n", result.stderr)
+        return True, "Docker processing completed."
 
     except subprocess.CalledProcessError as e:
-        print(f"ERROR: Docker command failed. Stderr:\n{e.stderr}")
-        return False, f"Docker command failed with exit code {e.returncode}. Stderr: {e.stderr}"
-    except FileNotFoundError:
-        print("ERROR: Docker command not found. Execution environment issue.")
-        return False, "Docker command not found. Verify Docker installation and PATH environment variable."
-    except subprocess.TimeoutExpired:
-        print("ERROR: Docker command timed out after 120 seconds.")
-        return False, "The map stitching process timed out after 120 seconds. It may require more resources."
+        print(f"ERROR: Docker failed!\nSTDOUT:\n{e.stdout}\nSTDERR:\n{e.stderr}")
+        return False, f"Docker failed: {e.stderr}"
     except Exception as e:
         print(f"UNEXPECTED ERROR: {e}")
-        return False, f"An unexpected error occurred during Docker execution. Check volume mount permissions: {e}"
+        return False, str(e)
 
 @app.route('/drone/stitch', methods=['GET', 'POST'])
 def drone_stitch():
