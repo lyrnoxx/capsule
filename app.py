@@ -74,6 +74,7 @@ def run_docker_command(temp_dir_path):
     print(f"INFO: Executing Docker Command: {' '.join(command)}")
 
     try:
+        print(f"Contents of {temp_dir_path}:", os.listdir(temp_dir_path))
         result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=180)
         print("Docker STDOUT:\n", result.stdout)
         print("Docker STDERR:\n", result.stderr)
@@ -89,7 +90,11 @@ def run_docker_command(temp_dir_path):
 @app.route('/drone/stitch', methods=['GET', 'POST'])
 def drone_stitch():
     if request.method == 'POST':
-        temp_dir = tempfile.mkdtemp()
+
+        base_temp = '/var/www/tmp'
+        os.makedirs(base_temp, exist_ok=True)
+        temp_dir = tempfile.mkdtemp(dir=base_temp)
+        os.chmod(temp_dir, 0o777)
         rgb_dir = os.path.join(temp_dir, 'rgb')
         os.makedirs(rgb_dir, exist_ok=True)
         
