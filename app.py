@@ -65,7 +65,7 @@ def run_docker_command(temp_dir_path):
 
     command = [
         'docker', 'run', '--rm',
-        '-v', f'{temp_dir_path}/:/data',
+        '-v', f'{temp_dir_path}:/data',
         'map2dfusion', 'DataPath=/data',
         'Win3D.Enable=0', 'ShouldStop=1',
         'Map.File2Save=/data/output.png'
