@@ -148,9 +148,8 @@ def drone_stitch():
             destination_path = os.path.join(app.config['OUTPUT_FOLDER'], final_map_filename)
             
             if os.path.exists(source_path):
-                shutil.move(source_path, destination_path)
-                
-                final_image_url = f"outputs/{final_map_filename}"
+                shutil.move(source_path, destination_path)                
+                final_image_url = url_for('static', filename=f"outputs/{final_map_filename}", _external=True)
                 print(f"SUCCESS: Moved output file to {final_image_url}")
             else:
                 print("ERROR: Docker command finished successfully but output.png was not found in the volume mount.")
