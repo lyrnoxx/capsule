@@ -179,8 +179,9 @@ let flipAnimation = null
             <h3 class="font-c size-md _w-ch">Papers</h3>
             <div class="abs-img">
               <div class="dual-img">
-                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467811_can.avif" loading="eager" alt="" class="dual-img-img"/>
-                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780c_can-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
+                 <img src="{{ url_for('static', filename='images/papers1.png') }}" loading="eager" alt="" class="dual-img-img"/>
+                 <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467811_can.avif" loading="eager" alt="" class="dual-img-img"/>
+                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780c_can-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
               </div>
             </div>
           </div>
@@ -205,6 +206,7 @@ let flipAnimation = null
             <h3 class="font-c size-md _w-ch">NGO</h3>
             <div class="abs-img">
               <div class="dual-img">
+                 <!-- <img src="{{ url_for('static', filename='images/org.png') }}" loading="eager" alt="" class="dual-img-img"/> -->
                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467813_chair.avif" loading="eager" alt="" class="dual-img-img"/>
                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467808_chair-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
               </div>
@@ -214,8 +216,13 @@ let flipAnimation = null
         <li>
           <div class="flip-item is-4"><div class="item-num">04</div>
           <h3 class="font-c size-md _w-ch">HDP</h3>
-          <div class="abs-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780f_socks.avif" loading="eager" alt="" class="dual-img-img"/>
-          <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div></div>
+          <div class="abs-img"><div class="dual-img">
+            <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467811_can.avif" loading="eager" alt="" class="dual-img-img"/>
+                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780c_can-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/>
+            <!-- <img src="{{ url_for('static', filename='images/org.png') }}" loading="eager" alt="" class="dual-img-img"/> -->
+            <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346780f_socks.avif" loading="eager" alt="" class="dual-img-img"/>
+            <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
+          </div></div></div>
         </li>
         <li>
           <div class="flip-item is-5"><div class="item-num">05</div>
@@ -683,7 +690,7 @@ addEventListener("GSAPReady", (event) => {
                           <h3 class="font-c size-md">Teaching Assistant at IIT Ropar</h3>
                           <div>will add more about this post here.</div>
                         </div></div><div class="slide-col"><div class="slide-img"><div class="dual-img">
-                          <img src="{{ url_for('static', filename='images/ta.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                          <img src="{{ url_for('static', filename='images/ta.png') }}" loading="eager" alt="" class="dual-img-img"/>
                           <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781f_face-5.avif" loading="eager" alt="" class="dual-img-img"/>
                           <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
                         </div>

@@ -185,5 +185,10 @@ def drone_stitch():
     return render_template('project_drone-stitch.html')
 
 
+@app.route('/drone/recent-works')
+def recentworks():
+    return render_template('awd.html')
+
+
 if __name__=='__main__':
     app.run(debug=True)
