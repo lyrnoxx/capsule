@@ -173,7 +173,7 @@ let flipAnimation = null
     <div class="comp">
       <ul data-flip="item" role="list" class="flip-list-w w-list-unstyled">
         <li>
-          <a href="{{ url_for('autoencoder') }}" class="flip-item-link" style="text-decoration: none;">
+          <a href="{{ url_for('autoencoder') }}" class="flip-item-link" style="text-decoration: none; color: inherit;">
           <div class="flip-item">
             <div class="item-num">01</div>
             <h3 class="font-c size-md _w-ch">Papers</h3>
@@ -188,7 +188,7 @@ let flipAnimation = null
           </a>
         </li>
         <li>
-          <a href="{{ url_for('drone') }}" class="flip-item-link" style="text-decoration: none;" target="_blank">
+          <a href="{{ url_for('drone') }}" class="flip-item-link" style="text-decoration: none; color: inherit;" target="_blank">
           <div class="flip-item is-2"><div class="item-num">02</div>
           <h3 class="font-c size-md _w-ch">MTP Drone</h3>
           <div class="abs-img">
@@ -225,12 +225,15 @@ let flipAnimation = null
           </div></div></div>
         </li>
         <li>
-          <div class="flip-item is-5"><div class="item-num">05</div>
+          <a href="{{ url_for('nlp') }}" class="flip-item-link" style="text-decoration: none; color: inherit;">
+          <div class="flip-item is-5">
+            <div class="item-num">05</div>
           <h3 class="font-c size-md _w-ch">NLP</h3>
           <div class="abs-img"><div class="dual-img">
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467812_headphones.avif" loading="eager" alt="" class="dual-img-img"/>
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467809_headphones-shadows.avif" loading="eager" alt="" class="dual-img-shadow"/>
             </div></div></div>
+            </a>
         </li>
         <li>
           <div class="flip-item is-6"><div class="item-num">06</div>
@@ -584,8 +587,6 @@ addEventListener("GSAPReady", (event) => {
 }
 </script></div></section> -->
 
-
-
 <!-- <section id="marquee" data-animate="marquee" class="sec"><div class="comp scroller"><div data-marquee="line" class="scroller-line first"><div class="scroller-text">SCROLLTRIGGER</div><div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467815_socks.avif" loading="eager" alt="" class="dual-img-img"/><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467810_socks-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/></div></div><div class="scroller-text"> MARQUEE</div></div>
     <div data-marquee="line" class="scroller-line second"><div class="scroller-text"> MARQUEE</div>
       <div class="marquee-img"><div class="dual-img"><img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac3467814_tomato.avif" loading="eager" alt="" class="dual-img-img"/>
@@ -655,7 +656,7 @@ addEventListener("GSAPReady", (event) => {
           <h3 class="font-c size-md">Service staff at Coffee shop</h3>
           <div>Family business. will be adding more here soon.</div></div></div>
           <div class="slide-col"><div class="slide-img"><div class="dual-img">
-            <img src="{{ url_for('static', filename='images/tea-stall.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+            <img src="{{ url_for('static', filename='images/tea-stall.svg') }}" loading="eager" alt="" class="dual-img-img" style="width:300px;height:auto;"/>
             <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781e_face-2.avif" loading="eager" alt="" class="dual-img-img"/>
             <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
           </div></div></div></div>
@@ -669,7 +670,7 @@ addEventListener("GSAPReady", (event) => {
             </div>
             <div class="slide-col"><div class="slide-img">
               <div class="dual-img">
-                <img src="{{ url_for('static', filename='images/delivery.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                <img src="{{ url_for('static', filename='images/delivery.svg') }}" loading="eager" alt="" class="dual-img-img" style="width:300px;height:auto;"/>
                 <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781d_face-1.avif" loading="eager" alt="" class="dual-img-img"/>
                 <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
               </div>
@@ -681,7 +682,7 @@ addEventListener("GSAPReady", (event) => {
                   <div class="slide-col flex-ve"><div>2023</div><div class="slide-text-block">
                     <h3 class="font-c size-md">Web Advisor at Hostgator</h3><div>Will fill soon.</div></div></div>
                     <div class="slide-col"><div class="slide-img"><div class="dual-img">
-                      <img src="{{ url_for('static', filename='images/web-advisor.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                      <img src="{{ url_for('static', filename='images/web-advisor.svg') }}" loading="eager" alt="" class="dual-img-img" style="width:300px;height:auto;"/>
                       <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781c_face-4.avif" loading="eager" alt="" class="dual-img-img"/>
                       <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
                     </div></div></div></div></li>
@@ -690,7 +691,7 @@ addEventListener("GSAPReady", (event) => {
                           <h3 class="font-c size-md">Teaching Assistant at IIT Ropar</h3>
                           <div>will add more about this post here.</div>
                         </div></div><div class="slide-col"><div class="slide-img"><div class="dual-img">
-                          <img src="{{ url_for('static', filename='images/ta.png') }}" loading="eager" alt="" class="dual-img-img"/>
+                          <img src="{{ url_for('static', filename='images/ta.png') }}" loading="eager" alt="" class="dual-img-img" />
                           <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781f_face-5.avif" loading="eager" alt="" class="dual-img-img"/>
                           <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
                         </div>
@@ -708,7 +709,7 @@ addEventListener("GSAPReady", (event) => {
                         <div class="slide-col">
                           <div class="slide-img">
                             <div class="dual-img">
-                              <img src="{{ url_for('static', filename='images/space-404.svg') }}" loading="eager" alt="" class="dual-img-img"/>
+                              <img src="{{ url_for('static', filename='images/space-404.svg') }}" loading="eager" alt="" class="dual-img-img" style="width:300px;height:auto;"/>
                               <!-- <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781b_face-3.avif" loading="eager" alt="" class="dual-img-img"/>
                               <img src="https://cdn.prod.website-files.com/685eb1dbb6a64a7ac346775d/685eb1dcb6a64a7ac346781a_face-5-shadow.avif" loading="eager" alt="" class="dual-img-shadow"/> -->
                             </div>
