@@ -189,6 +189,10 @@ def drone_stitch():
 def recentworks():
     return render_template('awd.html')
 
+@app.route('/nlp')
+def nlp():
+    return render_template('project_nlp.html')
+
 
 if __name__=='__main__':
     app.run(debug=True)
