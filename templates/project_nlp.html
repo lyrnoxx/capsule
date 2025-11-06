@@ -49,19 +49,19 @@
                                 <div class="navbar_link-text _1">Home</div>
                                 <div class="navbar_link-text _2">Home</div>
                             </a>
-                            <a href="/about" class="navbar_link w-inline-block">
+                            <a href="{{ url_for('static', filename='ppts/p2p.pdf') }}" target="_blank" class="navbar_link w-inline-block">
                                 <div class="navbar_link-text _1">About</div>
                                 <div class="navbar_link-text _2">About</div>
                             </a>
-                            <a href="/works" class="navbar_link w-inline-block">
+                            <!-- <a href="/works" class="navbar_link w-inline-block">
                                 <div class="navbar_link-text _1">Works</div>
                                 <div class="navbar_link-text _2">Works</div>
-                            </a>
-                            <a href="/blog" class="navbar_link w-inline-block">
+                            </a> -->
+                            <!-- <a href="/blog" class="navbar_link w-inline-block">
                                 <div class="navbar_link-text _1">Blog</div>
                                 <div class="navbar_link-text _2">Blog</div>
-                            </a>
-                        </div><a data-wf--button--variant="light-small" href="/contact"
+                            </a> -->
+                        </div><a data-wf--button--variant="light-small"
                             class="button w-variant-994e88c4-baec-2bbf-d0b3-8a2991a92ab2 w-inline-block">
                             <div class="button_inner w-variant-994e88c4-baec-2bbf-d0b3-8a2991a92ab2">
                                 <div class="button_gradient">
@@ -132,8 +132,25 @@
                             </label>
                             <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;" />
 
+                            <div class="cta_button-wrap"><a data-wf--button--variant="dark" href="{{ url_for('static', filename='ppts/p2p.pdf') }}" target="_blank"
+                                    class="button w-inline-block">
+                                    <div class="button_inner">
+                                        <div class="button_gradient">
+                                            <div class="button_gradient-ball ball-1"></div>
+                                            <div class="button_gradient-ball ball-2"></div>
+                                        </div>
+                                        <div class="button_text">Detect</div>
+                                    </div>
+                                    <div class="button_gradient-glow">
+                                        <div class="button_gradient-ball ball-1"></div>
+                                        <div class="button_gradient-ball ball-2"></div>
+                                    </div>
+                                </a>
+                                <p class="cta_text">Note: The server lacks the required GPU hardware to run the Vision Transformer model. Detect button will redirect to a demonstration of the model's output.</p>
+                            </div>
+                            
                             <!-- Detect button -->
-                            <button type="button" id="detectButton" class="button w-inline-block" disabled>
+                            <!-- <button type="button" id="detectButton" class="button w-inline-block"  disabled>
                                 <div class="button_inner">
                                 <div class="button_gradient">
                                     <div class="button_gradient-ball ball-1"></div>
@@ -145,7 +162,7 @@
                                 <div class="button_gradient-ball ball-1"></div>
                                 <div class="button_gradient-ball ball-2"></div>
                                 </div>
-                            </button>
+                            </button> -->
 
                             </div>
                             <!-- <p class="cta_text">Image can be re-uploaded.</p> -->
@@ -180,8 +197,32 @@
                     </div>
                     </div>
                 </div>
-                <div class="padding-section-medium"></div>
+                <!-- <div class="padding-section-medium"></div> -->
                 </section>
+
+            <!-- <section class="section_cta">
+                <div class="padding-section-xsmall"></div>
+                <div class="padding-global">
+                    <div class="container-medium">
+                        <div class="cta_components">
+                            <div class="cta_content" style="flex:1; min-width:300px;">
+                        <div class="cta_head">
+                            <div class="pill_wrap">
+                            <div class="cta_pill">Dino</div>
+                            </div>
+                            <div class="spacer-small"></div>
+                            <h2 class="heading-style-h5">
+                            Upload your image to get the prescription
+                            </h2>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="padding-section-medium"></div>
+            </section> -->
+
+            
 
             <!-- <section class="section_home-header">
                 <div class="padding-section-xxlarge"></div>
@@ -272,7 +313,7 @@
                 </div>
             </section> -->
 
-            <div class="padding-section-small"></div>
+            <div class="padding-section-medium"></div>
 
             <section id="section-brands" class="section_brands">
                 <div class="padding-global is-tiny">
@@ -581,7 +622,7 @@
 
 
 
-<script>
+<!-- <script>
   const fileInput = document.getElementById('fileInput');
   const previewImage = document.getElementById('previewImage');
   const videoWrapper = document.getElementById('videoWrapper');
@@ -619,18 +660,96 @@
     detectButton.querySelector('.button_text').innerText = 'Detect';
     detectButton.disabled = false;
   });
+</script> -->
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const previewImage = document.getElementById('previewImage');
+  const videoWrapper = document.getElementById('videoWrapper');
+  const detectButton = document.getElementById('detectButton');
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+        videoWrapper.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+      detectButton.disabled = false;
+    }
+  });
+
+  detectButton.addEventListener('click', async () => {
+    const file = fileInput.files[0];
+    if (!file) return alert('Please upload an image first.');
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    detectButton.disabled = true;
+    detectButton.querySelector('.button_text').innerText = 'Detecting...';
+
+    try {
+      const response = await fetch('/detect', { method: 'POST', body: formData });
+      const data = await response.json();
+
+      detectButton.querySelector('.button_text').innerText = 'Detect';
+      detectButton.disabled = false;
+
+      const resultText = data.result || 'No result returned.';
+      const outputHeading = document.querySelector('.section_cta .heading-style-h5');
+
+      if (data.error) {
+        outputHeading.textContent = `Error: ${data.error}`;
+        outputHeading.style.color = '#ff4d4d';
+      } else {
+        // Try to extract class and confidence for a clean display
+        //const classMatch = resultText.match(/Final Label:\s*(\S+)/);
+        //const confMatch = resultText.match(/Confidence:\s*([\d.]+)\s*\(([\d.]+)%\)/);
+        const labelPart = resultText.split("Final Label:").pop().split("Prescription:")[0].trim();
+        const prescPart = resultText.split("Prescription:").pop().trim();
+
+        if (labelPart) {
+          //outputHeading.textContent = `Class detected: ${classMatch[1]} (${confMatch[2]}% confidence)`;
+          //outputHeading.textContent = resultText.split("Final Label:").pop().trim() + "\n\n" + resultText.split("Prescription:").pop().trim();
+          //outputHeading.style.color = '#2fff77';
+          outputHeading.innerHTML = `
+            <span style="display:block; font-weight:600; margin-bottom:0.2rem;">
+                ${labelPart}
+            </span>
+            <span style="display:block; font-size:0.9rem; color:#474343;">
+                ${prescPart}
+            </span>
+            `;
+        } else {
+          // fallback: show raw text
+          outputHeading.textContent = resultText;
+          outputHeading.style.color = '#ffffff';
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error contacting server.');
+      detectButton.querySelector('.button_text').innerText = 'Detect';
+      detectButton.disabled = false;
+    }
+  });
 </script>
 
 
+
             
-            <div class="padding-section-small"></div>
+            <!-- <div class="padding-section-small"></div> -->
         </main>
         
         <footer class="footer">
             <div class="footer_wrap">
                 <div class="footer_component">
                     <div class="footer_main">
-                        <div class="footer_links-groups">
+                        <!-- <div class="footer_links-groups">
                             <div id="w-node-_0632acfa-8aaa-b158-7b6a-58a2921af54f-921af54a" class="footer_group">
                                 <div class="footer_link-label">Pages</div>
                                 <div class="footer_lists">
@@ -664,7 +783,7 @@
                                     src="https://cdn.prod.website-files.com/684a11845c7dd0b4b7745cd9/684f6429292bf57f3946e213_social-yt.svg"
                                     alt="" class="footer_social-media" />
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="footer_legal-links">
                         <div id="w-node-_0632acfa-8aaa-b158-7b6a-58a2921af569-921af54a" class="footer_legal-wrap">
@@ -682,9 +801,9 @@
                         <div id="w-node-_0632acfa-8aaa-b158-7b6a-58a2921af576-921af54a" class="footer_template-links">
                             <a href="/" class="footer_template-link">Home</a>
                             <a href="/drone" class="footer_template-link">Drone Home</a>
-                            <a href="/template/style-guide" class="footer_template-link">Style guide</a>
-                            <a href="/template/licenses" class="footer_template-link">Licenses</a>
-                            <a href="/template/changelog" class="footer_template-link">Changelog</a>
+                            <a href="{{ url_for('static', filename='ppts/p2p.pdf') }}" target="_blank" class="footer_template-link">About</a>
+                            <a class="footer_template-link">Contact</a>
+                            <!-- <a href="/template/changelog" class="footer_template-link">Changelog</a> -->
                         </div>
                     </div>
                 </div>
