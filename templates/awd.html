@@ -74,27 +74,26 @@
   <a   class="work-list_block w-inline-block">
     <div class="work-list_images-wrap">
       <div class="work-list_image-main">
-        <video 
-          class="work-list_img-main"
-          autoplay 
-          muted 
-          loop 
-          playsinline 
-          poster="{{ url_for('static', filename='images/chromor-cover.webp') }}">
-          <source src="{{ url_for('static', filename='videos/gazebo-ros.mp4') }}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="work-list_img-main" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe 
+                src="https://www.youtube.com/embed/1laiLWNBx0g?autoplay=1&mute=1&loop=1&playlist=1laiLWNBx0g&playsinline=1&controls=0&modestbranding=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            ></iframe>
+        </div>
         <div class="hover_pill">View case</div>
       </div>
 
-      <div class="work-list_image-second">
+      <!-- <div class="work-list_image-second">
         <img 
           loading="lazy" 
           src="{{ url_for('static', filename='images/gradient.webp') }}" 
           alt="" 
           class="work-list_img-second"
         />
-      </div>
+      </div> -->
     </div>
 
     <div class="work-list_infos">
@@ -112,27 +111,26 @@
   <a   class="work-list_block w-inline-block">
     <div class="work-list_images-wrap">
       <div class="work-list_image-main">
-        <video 
-          class="work-list_img-main"
-          autoplay 
-          muted 
-          loop 
-          playsinline 
-          poster="{{ url_for('static', filename='images/chromor-cover.webp') }}">
-          <source src="{{ url_for('static', filename='videos/3drone.mp4') }}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <div class="work-list_img-main" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe 
+                src="https://www.youtube.com/embed/RVWFm2L_yIQ?autoplay=1&mute=1&loop=1&playlist=1laiLWNBx0g&playsinline=1&controls=0&modestbranding=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            ></iframe>
+        </div>
         <div class="hover_pill">View case</div>
       </div>
 
-      <div class="work-list_image-second">
+      <!-- <div class="work-list_image-second">
         <img 
           loading="lazy" 
           src="{{ url_for('static', filename='images/gradient.webp') }}" 
           alt="" 
           class="work-list_img-second"
         />
-      </div>
+      </div> -->
     </div>
 
     <div class="work-list_infos">
