@@ -192,51 +192,51 @@ def recentworks():
 def nlp():
     return render_template('project_nlp.html')
 
-@app.route('/detect', methods=['POST'])
-def detect():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file uploaded'}), 400
+# @app.route('/detect', methods=['POST'])
+# def detect():
+#     if 'file' not in request.files:
+#         return jsonify({'error': 'No file uploaded'}), 400
 
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+#     file = request.files['file']
+#     if file.filename == '':
+#         return jsonify({'error': 'No selected file'}), 400
 
-    # Save uploaded file temporarily
-    with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(file.filename)[1]) as tmp:
-        file.save(tmp.name)
-        image_path = tmp.name
+#     # Save uploaded file temporarily
+#     with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(file.filename)[1]) as tmp:
+#         file.save(tmp.name)
+#         image_path = tmp.name
 
-    try:
-        # Get absolute paths
-        project_root = os.path.dirname(os.path.abspath(__file__))
-        dino_script = os.path.join(project_root, "p2p", "dino_inference.py")
+#     try:
+#         # Get absolute paths
+#         project_root = os.path.dirname(os.path.abspath(__file__))
+#         dino_script = os.path.join(project_root, "p2p", "dino_inference.py")
 
-        if not os.path.exists(dino_script):
-            return jsonify({'result': f"Error: dino_inference.py not found at {dino_script}"}), 500
+#         if not os.path.exists(dino_script):
+#             return jsonify({'result': f"Error: dino_inference.py not found at {dino_script}"}), 500
 
-        # Run inference using conda environment
-        command = f'conda run -n dino_env python "{dino_script}" "{image_path}"'
+#         # Run inference using conda environment
+#         command = f'conda run -n dino_env python "{dino_script}" "{image_path}"'
 
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True
-        )
+#         result = subprocess.run(
+#             command,
+#             shell=True,
+#             capture_output=True,
+#             text=True
+#         )
 
-        if result.returncode != 0:
-            output_text = f"Error: {result.stderr.strip()}"
-        else:
-            output_text = result.stdout.strip()
+#         if result.returncode != 0:
+#             output_text = f"Error: {result.stderr.strip()}"
+#         else:
+#             output_text = result.stdout.strip()
 
-    except Exception as e:
-        output_text = f"Exception: {str(e)}"
+#     except Exception as e:
+#         output_text = f"Exception: {str(e)}"
 
-    finally:
-        if os.path.exists(image_path):
-            os.remove(image_path)
+#     finally:
+#         if os.path.exists(image_path):
+#             os.remove(image_path)
 
-    return jsonify({'result': output_text})
+#     return jsonify({'result': output_text})
 
 
 if __name__=='__main__':
