@@ -188,6 +188,10 @@ def drone_stitch():
 def recentworks():
     return render_template('awd.html')
 
+@app.route('/talks')
+def talks():
+    return render_template('project_talks.html')
+
 @app.route('/nlp')
 def nlp():
     return render_template('project_nlp.html')
