@@ -192,6 +192,15 @@ def recentworks():
 def talks():
     return render_template('project_talks.html')
 
+@app.route('/vision')
+def vision():
+    return render_template('project_vision.html')
+
+@app.route('/graphics')
+def graphics():
+    return render_template('graphics.html')
+
+
 @app.route('/nlp')
 def nlp():
     return render_template('project_nlp.html')
