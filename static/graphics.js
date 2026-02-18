@@ -170,16 +170,30 @@ let fs = [
     [3,7]
 ]
 
+let objectCenter = {x: 0, y: 0, z: 0}
+
 function updateGeometry() {
     try {
         const newVs = JSON.parse(document.getElementById('vs-input').value);
         const newFs = JSON.parse(document.getElementById('fs-input').value);
         
-        // Basic validation
         if (Array.isArray(newVs) && Array.isArray(newFs)) {
             vs = newVs;
             fs = newFs;
-            console.log("Geometry updated successfully!");
+
+            const sum = vs.reduce((acc, v) => ({
+                x: acc.x +v.x,
+                y: acc.y + v.y,
+                z: acc.z + v.z
+            }), {x: 0, y: 0, z: 0})
+
+            objectCenter = {
+                x: sum.x / vs.length,
+                y: sum.y / vs.length,
+                z: sum.z / vs.length
+            };
+
+            console.log("Geometry updated. Center at: ", objectCenter);
         }
     } catch (e) {
         alert("Invalid JSON format. Please check your vertices and faces.");
@@ -211,9 +225,16 @@ function frame(){
         for(let i=0; i<f.length; ++i){
             const a = vs[f[i]]
             const b = vs[f[(i+1)%f.length]]
+
+            const centeredA = { x: a.x - objectCenter.x, y: a.y - objectCenter.y, z: a.z - objectCenter.z };
+            const centeredB = { x: b.x - objectCenter.x, y: b.y - objectCenter.y, z: b.z - objectCenter.z };
+
+            const rotA = rotate_xz(rotate_yz(centeredA, angle_yz), angle_xz);
+            const rotB = rotate_xz(rotate_yz(centeredB, angle_yz), angle_xz);
+
         line(
-            screen(project(translate_z(rotate_xz(rotate_yz(a, angle_yz), angle_xz), dz))),
-            screen(project(translate_z(rotate_xz(rotate_yz(b, angle_yz), angle_xz), dz)))
+            screen(project(translate_z({x: rotA.x + objectCenter.x, y: rotA.y + objectCenter.y, z: rotA.z + objectCenter.z}, dz))),
+            screen(project(translate_z({x: rotB.x + objectCenter.x, y: rotB.y + objectCenter.y, z: rotB.z + objectCenter.z}, dz)))
         )
         }
     }

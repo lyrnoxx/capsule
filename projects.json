@@ -1,0 +1,65 @@
+[
+    {
+        "name": "3D Engine",
+        "desc": "desc...",
+        "image": "images/projects/engine.png",
+        "link": "/graphics",
+        "tags": ["Graphics", "3D"]
+    },
+    {
+        "name": "MTP",
+        "desc": "desc...",
+        "image": "images/drone-image1.png",
+        "link": "/drone",
+        "tags": ["Robotics", "Systems"]
+    },
+    {
+        "name": "Drone mapper",
+        "desc": "desc...",
+        "image": "images/drone-image1.png",
+        "link": "https://mapper.alanjugal.tech",
+        "tags": ["RL", "Deep Learning"]
+    },
+    {
+        "name": "Visual SLAM - Lightweight",
+        "desc": "desc...",
+        "image": "images/papers1.png",
+        "link": "#",
+        "tags": ["SLAM", "Vision", "Robotics"]
+    },
+    {
+        "name": "Vision",
+        "desc": "desc...",
+        "image": "images/papers1.png",
+        "link": "/vision",
+        "tags": ["Vision", "Deep Learning"]
+    },
+    {
+        "name": "NLP",
+        "desc": "desc...",
+        "image": "images/agri.png",
+        "link": "/nlp",
+        "tags": ["NLP", "Deep Learning"]
+    },
+    {
+        "name": "Talks",
+        "desc": "desc...",
+        "image": "images/presenting.png",
+        "link": "/talks",
+        "tags": ["Talks"]
+    },
+    {
+        "name": "Drone Stitching",
+        "desc": "desc...",
+        "image": "images/drone-image1.png",
+        "link": "/drone/stitch",
+        "tags": ["Vision", "Robotics"]
+    },
+    {
+        "name": "Personel Tracker",
+        "desc": "desc...",
+        "image": "images/papers1.png",
+        "link": "/logger",
+        "tags": ["Data Analytics"]
+    }
+]

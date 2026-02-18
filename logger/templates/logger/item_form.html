@@ -1,0 +1,57 @@
+{% extends "logger/base.html" %}
+{% block title %}{{ "Edit" if item else "New" }} Item — Logger{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <a href="{{ url_for('logger.dashboard') }}" class="back-link">← Back</a>
+  <h1>{{ "Edit" if item else "Create" }} Item</h1>
+
+  <form method="POST" class="item-form">
+    <label>
+      <span>Name</span>
+      <input type="text" name="name" required
+             value="{{ item.name if item else '' }}"
+             placeholder="e.g. Daily Reading" />
+    </label>
+
+    <label>
+      <span>Description</span>
+      <textarea name="description" rows="2"
+                placeholder="Optional details…">{{ item.description if item else '' }}</textarea>
+    </label>
+
+    <div class="form-row">
+      <label>
+        <span>Frequency (days)</span>
+        <input type="number" name="frequency" step="0.5" min="0.5"
+               value="{{ item.frequency if item else 1.0 }}"
+               placeholder="e.g. 1 = daily, 7 = weekly" />
+      </label>
+
+      <label>
+        <span>Increase (α)</span>
+        <input type="number" name="alpha" step="0.1" min="0.1"
+               value="{{ item.alpha if item else 1.0 }}" />
+      </label>
+    </div>
+
+    <div class="form-row">
+      <label>
+        <span>Decay Rate</span>
+        <input type="number" name="decay_rate" step="0.01" min="0" max="1"
+               value="{{ item.decay_rate if item else 0.05 }}" />
+      </label>
+
+      <label>
+        <span>Target</span>
+        <input type="number" name="target" step="1" min="1"
+               value="{{ item.target|int if item else 100 }}" />
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-glow btn-full">
+      {{ "Save Changes" if item else "Create Item" }}
+    </button>
+  </form>
+</section>
+{% endblock %}

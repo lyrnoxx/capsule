@@ -1,0 +1,76 @@
+{% extends "logger/base.html" %}
+{% block title %}Dashboard — Logger{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+  <h1 class="page-title">My Items</h1>
+
+  {% if not items %}
+  <div class="empty-state">
+    <p>No items yet. Create one to start tracking!</p>
+    <a href="{{ url_for('logger.create_item') }}" class="btn btn-glow">+ New Item</a>
+  </div>
+  {% endif %}
+
+  <div class="items-grid">
+    {% for item in items %}
+    <div class="item-card" data-id="{{ item.id }}">
+      <!-- Ring Visual -->
+      <div class="ring-wrapper">
+        <svg class="ring-svg" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="grad-{{ item.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" class="ring-stop-1" />
+              <stop offset="100%" class="ring-stop-2" />
+            </linearGradient>
+            <filter id="glow-{{ item.id }}">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- track -->
+          <circle cx="100" cy="100" r="85" class="ring-track" />
+          <!-- progress arc -->
+          <circle cx="100" cy="100" r="85"
+                  class="ring-progress"
+                  data-progress="{{ item.progress }}"
+                  filter="url(#glow-{{ item.id }})"
+                  stroke="url(#grad-{{ item.id }})"
+                  stroke-dasharray="534.07"
+                  stroke-dashoffset="{{ 534.07 * (1 - item.progress) }}" />
+          <!-- centre text -->
+          <text x="100" y="92" class="ring-pct">{{ (item.progress * 100)|round(1) }}%</text>
+          <text x="100" y="115" class="ring-val">{{ item.current_value|round(1) }} / {{ item.target|round(0) }}</text>
+        </svg>
+
+        <!-- particle burst container -->
+        <div class="particles" id="particles-{{ item.id }}"></div>
+      </div>
+
+      <h3 class="item-name">
+        <a href="{{ url_for('logger.item_detail', item_id=item.id) }}">{{ item.name }}</a>
+      </h3>
+
+      <div class="item-meta">
+        <span class="badge badge-freq">every {{ item.frequency|round(0)|int }}d</span>
+        <span class="badge badge-streak" title="Current streak">🔥 {{ item.streak }}</span>
+      </div>
+
+      <div class="log-row">
+        <input type="number" class="log-amount" data-id="{{ item.id }}"
+               placeholder="α={{ item.alpha }}" step="0.1" min="0.1"
+               title="Custom amount (leave empty for default α)" />
+        <button class="btn btn-glow btn-log"
+                data-id="{{ item.id }}"
+                data-alpha="{{ item.alpha }}">
+          ＋ Log
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

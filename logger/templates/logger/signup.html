@@ -1,0 +1,42 @@
+{% extends "logger/base.html" %}
+{% block title %}Sign Up — Logger{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    <h1>Create Account</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="auth-form">
+      <label>
+        <span>Username</span>
+        <input type="text" name="username" required autofocus
+               placeholder="Pick a username" />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" required
+               placeholder="Create a password" />
+      </label>
+
+      <label>
+        <span>Confirm Password</span>
+        <input type="password" name="confirm" required
+               placeholder="Repeat password" />
+      </label>
+
+      <button type="submit" class="btn btn-glow btn-full">Sign Up</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('logger.login') }}">Log in</a></p>
+  </div>
+</section>
+{% endblock %}

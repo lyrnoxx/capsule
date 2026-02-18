@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from werkzeug.utils import secure_filename
 import os
+import json
 from PIL import Image
 import uuid
 import tempfile
 import shutil
 import time
 import subprocess
+from logger import init_app as init_logger, create_blueprint as logger_bp
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -15,6 +17,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
 app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024 
+
+init_logger(app)
+app.register_blueprint(logger_bp(), url_prefix='/logger')
+
+# Prevent Flask-Login from redirecting portfolio routes to a login page.
+# Auth is only required inside the /logger blueprint.
+app.login_manager.login_view = None
+
+@app.login_manager.unauthorized_handler
+def _handle_unauthorized():
+    if request.blueprint == 'logger':
+        return redirect(url_for('logger.login', next=request.url))
+    return redirect(url_for('home'))
 
 @app.route('/')
 def home():
@@ -200,6 +215,22 @@ def vision():
 def graphics():
     return render_template('graphics.html')
 
+@app.route('/projection')
+def projection():
+    # ── Load project cards from projects.json ──
+    # To add a new project, just append an entry to projects.json.
+    # Each object needs: name, desc, image, link, tags
+    #   - image : path relative to static/ (e.g. "images/projects/engine.png")
+    #   - link  : a route name like "/graphics" or an external URL
+    #   - tags  : list of category strings used for filtering
+    json_path = os.path.join(os.path.dirname(__file__), 'projects.json')
+    with open(json_path, encoding='utf-8') as f:
+        projects = json.load(f)
+
+    # Collect unique tags for the filter bar
+    all_tags = sorted({tag for p in projects for tag in p["tags"]})
+
+    return render_template('project_projection.html', projects=projects, all_tags=all_tags)
 
 @app.route('/nlp')
 def nlp():

@@ -1,0 +1,102 @@
+{% extends "logger/base.html" %}
+{% block title %}{{ item.name }} — Logger{% endblock %}
+
+{% block content %}
+<section class="detail-page">
+  <a href="{{ url_for('logger.dashboard') }}" class="back-link">← Back</a>
+
+  <div class="detail-header">
+    <!-- Large ring visual -->
+    <div class="ring-wrapper ring-lg">
+      <svg class="ring-svg" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="grad-detail" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" class="ring-stop-1" />
+            <stop offset="100%" class="ring-stop-2" />
+          </linearGradient>
+          <filter id="glow-detail">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <circle cx="100" cy="100" r="85" class="ring-track" />
+        <circle cx="100" cy="100" r="85"
+                class="ring-progress"
+                id="detail-ring"
+                data-progress="{{ item.progress }}"
+                filter="url(#glow-detail)"
+                stroke="url(#grad-detail)"
+                stroke-dasharray="534.07"
+                stroke-dashoffset="{{ 534.07 * (1 - item.progress) }}" />
+        <text x="100" y="92" class="ring-pct" id="detail-pct">{{ (item.progress * 100)|round(1) }}%</text>
+        <text x="100" y="115" class="ring-val" id="detail-val">{{ item.current_value|round(1) }} / {{ item.target|round(0) }}</text>
+      </svg>
+      <div class="particles" id="particles-detail"></div>
+    </div>
+
+    <div class="detail-info">
+      <h1>{{ item.name }}</h1>
+      {% if item.description %}
+      <p class="desc">{{ item.description }}</p>
+      {% endif %}
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Frequency</span>
+          <span class="stat-value">every {{ item.frequency|round(0)|int }}d</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Increase (α)</span>
+          <span class="stat-value">+{{ item.alpha }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Decay</span>
+          <span class="stat-value">−{{ (item.decay_rate * 100)|round(1) }}%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Streak</span>
+          <span class="stat-value">🔥 {{ item.streak }}</span>
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <input type="number" class="log-amount" data-id="{{ item.id }}"
+               placeholder="α={{ item.alpha }}" step="0.1" min="0.1"
+               title="Custom amount (leave empty for default α)" />
+        <button class="btn btn-glow btn-log" data-id="{{ item.id }}" data-alpha="{{ item.alpha }}">＋ Log</button>
+        <a href="{{ url_for('logger.edit_item', item_id=item.id) }}" class="btn btn-outline">Edit</a>
+        <form method="POST" action="{{ url_for('logger.delete_item', item_id=item.id) }}" class="inline-form"
+              onsubmit="return confirm('Delete this item?')">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log history -->
+  <div class="log-history">
+    <h2>Recent Logs</h2>
+    {% if logs %}
+    <table class="log-table">
+      <thead>
+        <tr><th>#</th><th>Amount</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>+{{ log.amount }}</td>
+          <td>{{ log.logged_at.strftime('%b %d, %Y  %H:%M') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="empty-state">No logs yet — hit the Log button!</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
