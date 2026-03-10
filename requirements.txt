@@ -7,5 +7,3 @@ flask-limiter==3.5.1
 Pillow==10.4.0
 python-dotenv==1.0.1
 gunicorn==22.0.0
-torch>=2.0
-numpy>=1.24

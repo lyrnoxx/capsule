@@ -11,8 +11,6 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timedelta
 
-import torch
-import numpy as np
 from PIL import Image
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_compress import Compress
@@ -165,23 +163,6 @@ def _fetch_github_stats():
             "lines_fmt": "0", "heatmap": [],
         }
 
-# ── Cache autoencoder model at startup ────────────────────────────────
-from models.models import DenoisingAutoencoder  # noqa: E402
-
-_ae_model = None
-_ae_model_path = os.path.join(os.path.dirname(__file__), "models", "autoencoder.pth")
-if os.path.exists(_ae_model_path):
-    try:
-        _ae_model = DenoisingAutoencoder()
-        _ae_model.load_state_dict(torch.load(_ae_model_path, map_location="cpu", weights_only=True))
-        _ae_model.eval()
-        log.info("Autoencoder model loaded.")
-    except Exception:
-        log.exception("Failed to load autoencoder model.")
-        _ae_model = None
-else:
-    log.warning("Autoencoder weights not found at %s", _ae_model_path)
-
 # ── Routes ────────────────────────────────────────────────────────────
 @app.route("/")
 def home():
@@ -208,19 +189,7 @@ def autoencoder():
 
         output_filename = f"{uuid.uuid4()}.png"
         output_path = os.path.join(app.config["OUTPUT_FOLDER"], output_filename)
-
-        if _ae_model is not None:
-            img_tensor = torch.tensor(
-                np.array(image, dtype=np.float32) / 255.0
-            ).unsqueeze(0).unsqueeze(0)
-            with torch.no_grad():
-                output_tensor = _ae_model(img_tensor)
-            output_img = Image.fromarray(
-                (output_tensor.squeeze().numpy() * 255).astype(np.uint8)
-            )
-            output_img.save(output_path)
-        else:
-            image.save(output_path)
+        image.save(output_path)
 
         return render_template(
             "project_autoencoder.html",
