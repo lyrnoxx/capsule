@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Stitching Application</title>
-    <!-- Load Tailwind CSS for modern, responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <style>
         /* Custom styles for better aesthetics */
         body {
@@ -15,9 +14,19 @@
         .card {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        /* Style for the file inputs, which are usually plain */
+        /* Style for the file inputs */
         input[type="file"]::file-selector-button {
-            @apply bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg cursor-pointer transition duration-300 ease-in-out;
+            background-color: #6366f1;
+            color: #fff;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background-color: #4f46e5;
         }
         /* Custom spinner animation */
         .spinner {

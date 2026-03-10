@@ -96,6 +96,23 @@ a:hover { text-decoration: underline; }
 }
 .empty-state .btn { margin-top: 1rem; }
 
+/* === Pagination === */
+.pagination {
+  display: flex; justify-content: center; gap: 0.4rem;
+  margin-top: 2rem; flex-wrap: wrap;
+}
+.btn-page {
+  display: inline-block; padding: 0.35rem 0.75rem;
+  border-radius: 8px; font-size: 0.85rem; font-weight: 500;
+  color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  text-decoration: none; cursor: pointer; transition: background 0.15s;
+}
+.btn-page:hover { background: var(--border); }
+.btn-page.active {
+  background: var(--accent); color: var(--bg); border-color: var(--accent);
+}
+.btn-page.dots { border: none; background: none; cursor: default; }
+
 /* ─────────────────────────────────────────────────────────
    ITEMS GRID
    ───────────────────────────────────────────────────────── */
@@ -173,6 +190,48 @@ a:hover { text-decoration: underline; }
 .ring-progress.pulse {
   animation: ring-pulse .5s ease-out;
 }
+
+/* ── Viz toggle button ── */
+.viz-toggle {
+  position: absolute;
+  top: .65rem; right: .65rem;
+  z-index: 5;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: color .2s, border-color .2s, background .2s;
+}
+.viz-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.viz-toggle-icon { width: 16px; height: 16px; }
+.viz-toggle-icon.hidden { display: none; }
+
+/* Viz panels – show/hide */
+.viz-panel.hidden { display: none; }
+
+/* ── Graph wrapper ── */
+.graph-wrapper {
+  position: relative;
+  width: 100%; height: 170px;
+  display: flex; align-items: center; justify-content: center;
+}
+.graph-canvas {
+  width: 100%; height: 100%;
+  border-radius: 8px;
+}
+.graph-empty {
+  position: absolute;
+  font-size: .75rem;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+.graph-wrapper .graph-empty.has-data { display: none; }
+
+/* make card position:relative for the toggle */
+.item-card { position: relative; }
 
 /* ── Particle burst ── */
 .particles {
@@ -387,4 +446,200 @@ a:hover { text-decoration: underline; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .form-row { flex-direction: column; gap: 1rem; }
   .topbar-right { gap: .35rem; }
+  .notes-grid { columns: 1 !important; }
 }
+
+/* ─────────────────────────────────────────────────────────
+   JOURNAL  —  Google Keep / Apple Notes style
+   ───────────────────────────────────────────────────────── */
+
+/* ── Composer ── */
+.note-composer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  display: flex; flex-direction: column; gap: .6rem;
+  transition: box-shadow .3s, border-color .3s;
+}
+.note-composer:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 24px var(--glow);
+}
+
+.composer-title {
+  background: transparent; border: none; outline: none;
+  font-size: 1rem; font-weight: 600;
+  color: var(--text); font-family: var(--font);
+}
+.composer-title::placeholder { color: var(--text-dim); }
+
+.composer-body {
+  background: transparent; border: none; outline: none;
+  font-size: .9rem; color: var(--text);
+  font-family: var(--font); resize: vertical;
+  min-height: 2.2rem;
+}
+.composer-body::placeholder { color: var(--text-dim); }
+
+.composer-toolbar {
+  display: flex; align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Color picker dots ── */
+.color-picker { display: flex; gap: .4rem; }
+
+.color-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color .15s, transform .15s;
+}
+.color-dot:hover { transform: scale(1.15); }
+.color-dot.active { border-color: var(--accent); }
+
+.color-dot[data-color="default"] { background: var(--surface); border-color: var(--border); }
+.color-dot[data-color="default"].active { border-color: var(--accent); }
+.color-dot[data-color="red"]     { background: #5c2b2b; }
+.color-dot[data-color="orange"]  { background: #5c3a1a; }
+.color-dot[data-color="yellow"]  { background: #4d4417; }
+.color-dot[data-color="green"]   { background: #1e3a2b; }
+.color-dot[data-color="blue"]    { background: #1a2e4a; }
+.color-dot[data-color="purple"]  { background: #3a1d5c; }
+
+/* ── Notes grid (masonry via CSS columns) ── */
+.notes-section { margin-bottom: 1.5rem; }
+.notes-section-label {
+  font-size: .7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-dim); margin-bottom: .75rem;
+}
+
+.notes-grid {
+  columns: 3 240px;
+  column-gap: 1rem;
+}
+
+/* ── Note card ── */
+.note-card {
+  break-inside: avoid;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .25s, box-shadow .25s, transform .15s;
+}
+.note-card:hover {
+  border-color: rgba(255,255,255,.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+  transform: translateY(-1px);
+}
+
+/* colour variants */
+.note-card[data-color="red"]    { background: #3b1c1c; border-color: #5c2b2b; }
+.note-card[data-color="orange"] { background: #3b2810; border-color: #5c3a1a; }
+.note-card[data-color="yellow"] { background: #33300e; border-color: #4d4417; }
+.note-card[data-color="green"]  { background: #142a1e; border-color: #1e3a2b; }
+.note-card[data-color="blue"]   { background: #111f35; border-color: #1a2e4a; }
+.note-card[data-color="purple"] { background: #27113b; border-color: #3a1d5c; }
+
+.note-card-title {
+  font-size: .95rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: .35rem;
+  word-wrap: break-word;
+}
+.note-card-body {
+  font-size: .82rem; color: var(--text-dim);
+  white-space: pre-wrap; word-wrap: break-word;
+  line-height: 1.45;
+  /* Clamp to ~8 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: .65rem;
+}
+.note-card-date {
+  font-size: .65rem; color: var(--text-dim);
+}
+
+/* Pin icon */
+.note-pin {
+  position: absolute; top: .55rem; right: .55rem;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-dim); padding: 2px;
+  transition: color .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.note-pin:hover, .note-pin.pinned { color: var(--accent); }
+.note-pin svg { width: 16px; height: 16px; }
+
+/* Action buttons row (shown on hover) */
+.note-actions {
+  display: flex; gap: .4rem;
+  opacity: 0; transition: opacity .2s;
+}
+.note-card:hover .note-actions { opacity: 1; }
+
+.note-action-btn {
+  background: none; border: none;
+  color: var(--text-dim); cursor: pointer;
+  padding: 2px; display: flex;
+  transition: color .15s;
+}
+.note-action-btn:hover { color: var(--text); }
+.note-action-btn svg { width: 15px; height: 15px; }
+
+/* ── Edit modal / overlay ── */
+.note-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+}
+.note-modal-overlay.open {
+  opacity: 1; pointer-events: auto;
+}
+
+.note-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%; max-width: 560px;
+  padding: 1.5rem;
+  display: flex; flex-direction: column; gap: .65rem;
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+}
+
+.modal-title {
+  background: transparent; border: none; outline: none;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text); font-family: var(--font);
+  width: 100%;
+}
+.modal-body {
+  background: transparent; border: none; outline: none;
+  font-size: .9rem; color: var(--text);
+  font-family: var(--font); resize: vertical;
+  min-height: 120px; width: 100%;
+}
+.modal-toolbar {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: .5rem;
+  margin-top: .25rem;
+}
+.modal-toolbar .color-picker { flex: 1; }

@@ -15,8 +15,7 @@
     {% endwith %}
 
     <form method="POST" class="auth-form">
-      <label>
-        <span>Username</span>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <input type="text" name="username" required autofocus
                placeholder="Your username" />
       </label>

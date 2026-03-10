@@ -15,8 +15,15 @@
   <div class="items-grid">
     {% for item in items %}
     <div class="item-card" data-id="{{ item.id }}">
+
+      <!-- Toggle ring / graph -->
+      <button class="viz-toggle" data-id="{{ item.id }}" title="Switch view">
+        <svg class="viz-toggle-icon icon-graph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <svg class="viz-toggle-icon icon-ring hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 8.66 5"/></svg>
+      </button>
+
       <!-- Ring Visual -->
-      <div class="ring-wrapper">
+      <div class="ring-wrapper viz-panel viz-ring">
         <svg class="ring-svg" viewBox="0 0 200 200">
           <defs>
             <linearGradient id="grad-{{ item.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -50,6 +57,12 @@
         <div class="particles" id="particles-{{ item.id }}"></div>
       </div>
 
+      <!-- Graph Visual (hidden by default) -->
+      <div class="graph-wrapper viz-panel viz-graph hidden">
+        <canvas class="graph-canvas" id="graph-{{ item.id }}" width="240" height="170"></canvas>
+        <p class="graph-empty">Log entries to see graph</p>
+      </div>
+
       <h3 class="item-name">
         <a href="{{ url_for('logger.item_detail', item_id=item.id) }}">{{ item.name }}</a>
       </h3>
@@ -72,5 +85,27 @@
     </div>
     {% endfor %}
   </div>
+
+  {% if pagination.pages > 1 %}
+  <nav class="pagination">
+    {% if pagination.has_prev %}
+    <a href="{{ url_for('logger.dashboard', page=pagination.prev_num) }}" class="btn btn-page">&laquo; Prev</a>
+    {% endif %}
+    {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if p %}
+        {% if p == pagination.page %}
+        <span class="btn btn-page active">{{ p }}</span>
+        {% else %}
+        <a href="{{ url_for('logger.dashboard', page=p) }}" class="btn btn-page">{{ p }}</a>
+        {% endif %}
+      {% else %}
+      <span class="btn btn-page dots">&hellip;</span>
+      {% endif %}
+    {% endfor %}
+    {% if pagination.has_next %}
+    <a href="{{ url_for('logger.dashboard', page=pagination.next_num) }}" class="btn btn-page">Next &raquo;</a>
+    {% endif %}
+  </nav>
+  {% endif %}
 </section>
 {% endblock %}

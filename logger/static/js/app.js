@@ -9,6 +9,7 @@ const API_BASE = (window.LOGGER_API_BASE || "/api/items").replace(/\/+$/, "");
 document.addEventListener("DOMContentLoaded", () => {
   colouriseRings();
   bindLogButtons();
+  bindVizToggles();
 });
 
 /* ── Colour helpers ─────────────────────────────────────── */
@@ -118,12 +119,18 @@ function bindLogButtons() {
       try {
         const res = await fetch(`${API_BASE}/${id}/log`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "X-CSRFToken": window.CSRF_TOKEN },
           body: JSON.stringify(body),
         });
         if (!res.ok) throw new Error("log failed");
         const data = await res.json();
         updateCard(id, data);
+        invalidateGraphCache(id);
+        // Redraw graph if it's currently visible
+        const card = document.querySelector(`.item-card[data-id="${id}"]`);
+        if (card && !card.querySelector(".viz-graph.hidden")) {
+          loadAndDrawGraph(id);
+        }
         if (amountInput) amountInput.value = "";
       } catch (e) {
         console.error(e);
@@ -200,4 +207,200 @@ function updateCard(id, data) {
       statValues[3].textContent = "🔥 " + data.streak;
     }
   }
+}
+
+/* ── Viz toggle (ring ↔ graph) ──────────────────────────── */
+
+/** Cache for fetched graph data so we don't re-fetch every toggle */
+const graphCache = {};
+
+function bindVizToggles() {
+  document.querySelectorAll(".viz-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const card = btn.closest(".item-card");
+      const ringPanel = card.querySelector(".viz-ring");
+      const graphPanel = card.querySelector(".viz-graph");
+      const iconGraph = btn.querySelector(".icon-graph");
+      const iconRing = btn.querySelector(".icon-ring");
+
+      const showingRing = !ringPanel.classList.contains("hidden");
+
+      if (showingRing) {
+        // Switch to graph
+        ringPanel.classList.add("hidden");
+        graphPanel.classList.remove("hidden");
+        iconGraph.classList.add("hidden");
+        iconRing.classList.remove("hidden");
+        loadAndDrawGraph(id);
+      } else {
+        // Switch to ring
+        graphPanel.classList.add("hidden");
+        ringPanel.classList.remove("hidden");
+        iconRing.classList.add("hidden");
+        iconGraph.classList.remove("hidden");
+      }
+    });
+  });
+}
+
+async function loadAndDrawGraph(id) {
+  if (!graphCache[id]) {
+    try {
+      const res = await fetch(`${API_BASE}/${id}/history`);
+      if (!res.ok) throw new Error("history fetch failed");
+      graphCache[id] = await res.json();
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+  }
+  drawGlowGraph(id, graphCache[id]);
+}
+
+/** Invalidate cache after a log so the graph refreshes next time */
+function invalidateGraphCache(id) {
+  delete graphCache[id];
+}
+
+/* ── Glowing line graph on <canvas> ─────────────────────── */
+
+function drawGlowGraph(id, data) {
+  const canvas = document.getElementById("graph-" + id);
+  if (!canvas) return;
+
+  const emptyMsg = canvas.parentElement.querySelector(".graph-empty");
+  const points = data.points;
+
+  if (!points || points.length === 0) {
+    if (emptyMsg) emptyMsg.classList.remove("has-data");
+    return;
+  }
+  if (emptyMsg) emptyMsg.classList.add("has-data");
+
+  // High-DPI support
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+
+  const W = rect.width;
+  const H = rect.height;
+  const pad = { top: 18, right: 12, bottom: 28, left: 36 };
+  const plotW = W - pad.left - pad.right;
+  const plotH = H - pad.top - pad.bottom;
+
+  const target = data.target || 100;
+  const maxY = Math.max(target, ...points.map((p) => p.cumulative)) * 1.05;
+  const vals = points.map((p) => p.cumulative);
+
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+
+  // Get gradient colours from the current progress
+  const progress = vals.length ? vals[vals.length - 1] / target : 0;
+  const [c1, c2] = progressColours(Math.min(progress, 1));
+
+  // ── Grid lines ──
+  ctx.strokeStyle = "rgba(255,255,255,0.05)";
+  ctx.lineWidth = 1;
+  const gridLines = 4;
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + (plotH / gridLines) * i;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + plotW, y);
+    ctx.stroke();
+  }
+
+  // ── Y-axis labels ──
+  ctx.fillStyle = "rgba(255,255,255,0.3)";
+  ctx.font = "9px Inter, system-ui, sans-serif";
+  ctx.textAlign = "right";
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + (plotH / gridLines) * i;
+    const val = maxY - (maxY / gridLines) * i;
+    ctx.fillText(val >= 10 ? Math.round(val) : val.toFixed(1), pad.left - 5, y + 3);
+  }
+
+  // ── X-axis labels (first, middle, last) ──
+  ctx.textAlign = "center";
+  const xLabels = [0, Math.floor(points.length / 2), points.length - 1];
+  const uniqueLabels = [...new Set(xLabels)];
+  uniqueLabels.forEach((i) => {
+    const x = pad.left + (plotW / Math.max(points.length - 1, 1)) * i;
+    ctx.fillText(points[i].date, x, H - 6);
+  });
+
+  // ── Target line ──
+  const targetY = pad.top + plotH * (1 - target / maxY);
+  ctx.strokeStyle = "rgba(250,204,21,0.25)";
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(pad.left, targetY);
+  ctx.lineTo(pad.left + plotW, targetY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── Build path ──
+  const pathPoints = vals.map((v, i) => ({
+    x: pad.left + (plotW / Math.max(vals.length - 1, 1)) * i,
+    y: pad.top + plotH * (1 - v / maxY),
+  }));
+
+  // ── Gradient fill under curve ──
+  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + plotH);
+  grad.addColorStop(0, c1 + "40");
+  grad.addColorStop(1, c1 + "00");
+
+  ctx.beginPath();
+  ctx.moveTo(pathPoints[0].x, pad.top + plotH);
+  pathPoints.forEach((pt) => ctx.lineTo(pt.x, pt.y));
+  ctx.lineTo(pathPoints[pathPoints.length - 1].x, pad.top + plotH);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // ── Glowing line ──
+  // Outer glow
+  ctx.shadowColor = c1;
+  ctx.shadowBlur = 14;
+  ctx.strokeStyle = c1;
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  pathPoints.forEach((pt, i) => (i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y)));
+  ctx.stroke();
+
+  // Inner bright line
+  ctx.shadowBlur = 6;
+  ctx.shadowColor = c2;
+  ctx.strokeStyle = c2;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  pathPoints.forEach((pt, i) => (i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y)));
+  ctx.stroke();
+
+  ctx.shadowBlur = 0;
+
+  // ── Dots on data points ──
+  pathPoints.forEach((pt, i) => {
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = i === pathPoints.length - 1 ? "#fff" : c2;
+    ctx.fill();
+    if (i === pathPoints.length - 1) {
+      // glow on latest point
+      ctx.shadowColor = c1;
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = c1;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  });
 }

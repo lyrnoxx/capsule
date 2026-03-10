@@ -11,6 +11,8 @@
     <a href="{{ url_for('logger.dashboard') }}" class="logo">◎ Logger</a>
     <div class="topbar-right">
       {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logger.dashboard') }}" class="btn btn-sm btn-outline">Items</a>
+        <a href="{{ url_for('logger.journal') }}" class="btn btn-sm btn-outline">Journal</a>
         <a href="{{ url_for('logger.create_item') }}" class="btn btn-sm btn-glow">+ New Item</a>
         <span class="topbar-user">{{ current_user.username }}</span>
         <a href="{{ url_for('logger.logout') }}" class="btn btn-sm btn-outline">Logout</a>
@@ -27,6 +29,7 @@
 
   <script>
     window.LOGGER_API_BASE = {{ url_for('logger.api_items') | tojson }};
+    window.CSRF_TOKEN = {{ csrf_token() | tojson }};
   </script>
   <script src="{{ url_for('logger.static', filename='js/app.js') }}"></script>
   {% block scripts %}{% endblock %}

@@ -21,6 +21,9 @@ class User(UserMixin, db.Model):
     items = db.relationship(
         "Item", backref="owner", lazy="dynamic", cascade="all, delete-orphan"
     )
+    notes = db.relationship(
+        "Note", backref="owner", lazy="dynamic", cascade="all, delete-orphan"
+    )
 
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
@@ -126,3 +129,35 @@ class LogEntry(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey("items.id"), nullable=False)
     amount = db.Column(db.Float, nullable=False)
     logged_at = db.Column(db.DateTime, nullable=False, default=_utcnow)
+
+
+# ─────────────────────────────────────────────────────────
+#  NOTE  (Journal / Keep-style notes)
+# ─────────────────────────────────────────────────────────
+
+class Note(db.Model):
+    """A simple note – Google Keep / Apple Notes style."""
+
+    __tablename__ = "notes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    title = db.Column(db.String(200), nullable=False, default="")
+    body = db.Column(db.Text, nullable=False, default="")
+    color = db.Column(db.String(20), nullable=False, default="default")
+    pinned = db.Column(db.Boolean, nullable=False, default=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=_utcnow)
+    updated_at = db.Column(
+        db.DateTime, nullable=False, default=_utcnow, onupdate=_utcnow
+    )
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "body": self.body,
+            "color": self.color,
+            "pinned": self.pinned,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
+        }

@@ -1,8 +1,8 @@
-from flask import render_template, request, redirect, url_for, jsonify, flash
+from flask import render_template, request, redirect, url_for, jsonify, flash, current_app
 from flask_login import login_user, logout_user, current_user
 
 from . import db
-from .models import User, Item, LogEntry
+from .models import User, Item, LogEntry, Note
 
 # Routes that guests (unauthenticated users) may access
 _OPEN_ENDPOINTS = {"logger.login", "logger.signup", "logger.static"}
@@ -25,7 +25,7 @@ def register_routes(bp):
         if current_user.is_authenticated:
             return redirect(url_for("logger.dashboard"))
         if request.method == "POST":
-            username = request.form["username"].strip()
+            username = request.form["username"].strip()[:80]
             password = request.form["password"]
             confirm = request.form["confirm"]
             if not username or not password:
@@ -66,15 +66,19 @@ def register_routes(bp):
     # ─── Pages ────────────────────────────────────────────────────────
     @bp.route("/")
     def dashboard():
-        items = (
+        page = request.args.get("page", 1, type=int)
+        per_page = 20
+        pagination = (
             Item.query.filter_by(user_id=current_user.id)
             .order_by(Item.created_at.desc())
-            .all()
+            .paginate(page=page, per_page=per_page, error_out=False)
         )
-        for item in items:
+        for item in pagination.items:
             item.apply_decay()
         db.session.commit()
-        return render_template("logger/dashboard.html", items=items)
+        return render_template(
+            "logger/dashboard.html", items=pagination.items, pagination=pagination
+        )
 
     @bp.route("/items/new", methods=["GET", "POST"])
     def create_item():
@@ -147,6 +151,28 @@ def register_routes(bp):
         ).first_or_404()
         return jsonify(item.to_dict())
 
+    @bp.route("/api/items/<int:item_id>/history")
+    def api_item_history(item_id):
+        """Return recent log entries for graphing (oldest→newest)."""
+        item = Item.query.filter_by(
+            id=item_id, user_id=current_user.id
+        ).first_or_404()
+        logs = (
+            item.logs.order_by(LogEntry.logged_at.asc())
+            .limit(60)
+            .all()
+        )
+        cumulative = 0.0
+        points = []
+        for log in logs:
+            cumulative = min(cumulative + log.amount, item.target)
+            points.append({
+                "date": log.logged_at.strftime("%b %d"),
+                "amount": round(log.amount, 2),
+                "cumulative": round(cumulative, 2),
+            })
+        return jsonify({"target": item.target, "points": points})
+
     @bp.route("/api/items")
     def api_items():
         items = (
@@ -155,3 +181,63 @@ def register_routes(bp):
             .all()
         )
         return jsonify([i.to_dict() for i in items])
+
+    # ─── Journal pages ────────────────────────────────────────────────
+    @bp.route("/journal")
+    def journal():
+        notes = (
+            Note.query.filter_by(user_id=current_user.id)
+            .order_by(Note.pinned.desc(), Note.updated_at.desc())
+            .all()
+        )
+        return render_template("logger/journal.html", notes=[n.to_dict() for n in notes])
+
+    # ─── Journal API ──────────────────────────────────────────────────
+    @bp.route("/api/notes", methods=["GET"])
+    def api_notes():
+        notes = (
+            Note.query.filter_by(user_id=current_user.id)
+            .order_by(Note.pinned.desc(), Note.updated_at.desc())
+            .all()
+        )
+        return jsonify([n.to_dict() for n in notes])
+
+    @bp.route("/api/notes", methods=["POST"])
+    def api_create_note():
+        data = request.get_json(silent=True) or {}
+        note = Note(
+            user_id=current_user.id,
+            title=data.get("title", "").strip(),
+            body=data.get("body", "").strip(),
+            color=data.get("color", "default"),
+            pinned=bool(data.get("pinned", False)),
+        )
+        db.session.add(note)
+        db.session.commit()
+        return jsonify(note.to_dict()), 201
+
+    @bp.route("/api/notes/<int:note_id>", methods=["PATCH"])
+    def api_update_note(note_id):
+        note = Note.query.filter_by(
+            id=note_id, user_id=current_user.id
+        ).first_or_404()
+        data = request.get_json(silent=True) or {}
+        if "title" in data:
+            note.title = data["title"].strip()
+        if "body" in data:
+            note.body = data["body"].strip()
+        if "color" in data:
+            note.color = data["color"]
+        if "pinned" in data:
+            note.pinned = bool(data["pinned"])
+        db.session.commit()
+        return jsonify(note.to_dict())
+
+    @bp.route("/api/notes/<int:note_id>", methods=["DELETE"])
+    def api_delete_note(note_id):
+        note = Note.query.filter_by(
+            id=note_id, user_id=current_user.id
+        ).first_or_404()
+        db.session.delete(note)
+        db.session.commit()
+        return jsonify({"ok": True})

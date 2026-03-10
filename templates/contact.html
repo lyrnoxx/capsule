@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="sec">
+  <div class="comp" style="max-width: 640px; margin: 0 auto; padding: 4rem 1.5rem;">
+    <a href="/" style="display:inline-flex;align-items:center;gap:0.4rem;text-decoration:none;color:var(--primary,#270f03);opacity:0.6;font-size:0.9rem;margin-bottom:2rem;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Home
+    </a>
+    <h1 class="font-c size-lg" style="margin-bottom: 1rem;">Get in Touch</h1>
+    <p style="opacity:0.6; margin-bottom: 2rem;">Have a question or want to collaborate? Drop a message below.</p>
+
+    {% if success %}
+    <div style="padding: 1.5rem; border: 1px solid var(--green, #10CD00); border-radius: var(--rounded-1, 6px); margin-bottom: 2rem;">
+      <p style="color: var(--green, #10CD00); font-weight: 600;">Thanks! Your message has been received.</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div style="padding: 1rem; border: 1px solid #c0392b; border-radius: var(--rounded-1, 6px); margin-bottom: 1.5rem;">
+      <p style="color: #c0392b;">{{ error }}</p>
+    </div>
+    {% endif %}
+
+    {% if not success %}
+    <form method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+      <label style="display: flex; flex-direction: column; gap: 0.35rem;">
+        <span style="font-size: 0.85rem; opacity:0.6;">Name</span>
+        <input type="text" name="name" required placeholder="Your name"
+               style="padding: 0.75rem 1rem; background: transparent; border: 1px solid rgba(39,15,3,0.2); border-radius: var(--rounded-1, 6px); color: inherit; font-size: 1rem; font-family: inherit;"/>
+      </label>
+
+      <label style="display: flex; flex-direction: column; gap: 0.35rem;">
+        <span style="font-size: 0.85rem; opacity:0.6;">Email</span>
+        <input type="email" name="email" required placeholder="you@example.com"
+               style="padding: 0.75rem 1rem; background: transparent; border: 1px solid rgba(39,15,3,0.2); border-radius: var(--rounded-1, 6px); color: inherit; font-size: 1rem; font-family: inherit;"/>
+      </label>
+
+      <label style="display: flex; flex-direction: column; gap: 0.35rem;">
+        <span style="font-size: 0.85rem; opacity:0.6;">Message</span>
+        <textarea name="message" required rows="5" placeholder="Your message…"
+                  style="padding: 0.75rem 1rem; background: transparent; border: 1px solid rgba(39,15,3,0.2); border-radius: var(--rounded-1, 6px); color: inherit; font-size: 1rem; font-family: inherit; resize: vertical;"></textarea>
+      </label>
+
+      <button type="submit"
+              style="padding: 0.85rem 2rem; background: var(--primary, #270f03); color: var(--secondary, #ffe9cf); border: none; border-radius: var(--rounded-1, 6px); font-size: 1rem; font-weight: 600; cursor: pointer; align-self: flex-start; font-family: inherit; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+        Send Message
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

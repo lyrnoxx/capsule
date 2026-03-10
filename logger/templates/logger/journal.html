@@ -1,0 +1,55 @@
+{% extends "logger/base.html" %}
+{% block title %}Journal — Logger{% endblock %}
+
+{% block content %}
+<section class="journal">
+  <h1 class="page-title">Journal</h1>
+
+  <!-- ── New note composer ── -->
+  <div class="note-composer" id="note-composer">
+    <input type="text" class="composer-title" id="composer-title" placeholder="Title" />
+    <textarea class="composer-body" id="composer-body" placeholder="Take a note…" rows="1"></textarea>
+    <div class="composer-toolbar">
+      <div class="color-picker" id="composer-colors">
+        <button class="color-dot active" data-color="default" title="Default"></button>
+        <button class="color-dot" data-color="red" title="Red"></button>
+        <button class="color-dot" data-color="orange" title="Orange"></button>
+        <button class="color-dot" data-color="yellow" title="Yellow"></button>
+        <button class="color-dot" data-color="green" title="Green"></button>
+        <button class="color-dot" data-color="blue" title="Blue"></button>
+        <button class="color-dot" data-color="purple" title="Purple"></button>
+      </div>
+      <button class="btn btn-sm btn-glow" id="composer-save">Save</button>
+    </div>
+  </div>
+
+  <!-- ── Pinned section ── -->
+  <div class="notes-section pinned-section" id="pinned-section" style="display:none;">
+    <h2 class="notes-section-label">Pinned</h2>
+    <div class="notes-grid" id="pinned-grid"></div>
+  </div>
+
+  <!-- ── Other notes ── -->
+  <div class="notes-section" id="others-section" style="display:none;">
+    <h2 class="notes-section-label">Others</h2>
+    <div class="notes-grid" id="others-grid"></div>
+  </div>
+
+  <!-- ── Empty state ── -->
+  <div class="empty-state" id="journal-empty">
+    <p>No notes yet. Start typing above!</p>
+  </div>
+</section>
+
+<!-- Pre-load existing notes as JSON so there's no flash -->
+<script type="application/json" id="notes-data">
+  {{ notes | tojson }}
+</script>
+<script>
+  window.__NOTES__ = JSON.parse(document.getElementById('notes-data').textContent);
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('logger.static', filename='js/journal.js') }}"></script>
+{% endblock %}

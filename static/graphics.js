@@ -238,6 +238,14 @@ function frame(){
         )
         }
     }
-    setTimeout(frame, 1000/FPS)
 }
-setTimeout(frame, 1000/FPS)
+
+let lastFrameTime = 0
+function animate(timestamp) {
+    if (timestamp - lastFrameTime >= 1000/FPS) {
+        frame()
+        lastFrameTime = timestamp
+    }
+    requestAnimationFrame(animate)
+}
+requestAnimationFrame(animate)

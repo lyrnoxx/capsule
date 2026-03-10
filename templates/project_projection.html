@@ -187,15 +187,83 @@
                 .product-single-grid.hidden-card {
                     display: none;
                 }
+
+                /* Override Habitat theme to match main site */
+                body, .page-wrapper {
+                    background-color: #ffe9cf !important;
+                    color: #270f03 !important;
+                }
+                .navbar1_component {
+                    background-color: #ffe9cf !important;
+                }
+                .navbar1_link {
+                    color: #270f03 !important;
+                }
+                .navbar1_link:hover, .navbar1_link.w--current {
+                    opacity: 0.6;
+                }
+                .footer.background-color-footer,
+                .background-color-black {
+                    background-color: #270f03 !important;
+                    color: #ffe9cf !important;
+                }
+                .footer1_link, .footer1_social-link {
+                    color: #ffe9cf !important;
+                }
+                .footer1_credit-text {
+                    color: rgba(255,233,207,0.5) !important;
+                }
+                .filter-btn {
+                    color: #270f03;
+                    border-color: rgba(39,15,3,0.15);
+                }
+                .filter-btn.active {
+                    background-color: #270f03 !important;
+                    color: #ffe9cf !important;
+                    border-color: #270f03 !important;
+                }
+                .filter-btn:hover {
+                    background-color: rgba(39,15,3,0.06);
+                }
+                .line-divider {
+                    background-color: rgba(255,233,207,0.15) !important;
+                }
+                .product7_image-wrapper {
+                    padding-top: 0 !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                }
+                .navbar1_logo-link {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    letter-spacing: -0.02em;
+                    text-decoration: none;
+                    color: #270f03 !important;
+                }
+
+                .title-card {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    aspect-ratio: 4 / 3;
+                    border-radius: 0.375rem;
+                    font-size: 1.35rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                    color: #fff;
+                    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                    text-align: center;
+                    padding: 1.5rem;
+                }
             </style>
         </div>
         <main class="main-wrapper">
             <div data-collapse="medium" data-animation="default" data-duration="400"
                 data-w-id="9ca2dfc3-dac3-537b-21e8-ff1d3bd117c2" data-easing="ease" data-easing2="ease" role="banner"
                 class="navbar1_component w-nav">
-                <div class="navbar1_container"><a href="/" class="navbar1_logo-link w-nav-brand"><img
-                            src="https://cdn.prod.website-files.com/62b5e26a99a06f072c51d127/62b5e8e7da868fe4307206c9_habitat-logo.svg"
-                            loading="lazy" width="130" alt="" class="navbar1_logo" /></a>
+                <div class="navbar1_container"><a href="/" class="navbar1_logo-link w-nav-brand">Jugal Alan</a>
                     <nav role="navigation" class="navbar1_menu w-nav-menu"><a href="/"
                             class="navbar1_link w-nav-link">Home</a><a href="/projection" aria-current="page"
                             class="navbar1_link w-nav-link w--current">Projects</a><a
@@ -253,11 +321,9 @@
                                                                         class="product7_item-link w-inline-block">
                                                                         <div class="w-layout-grid product-single-grid">
                                                                             <div class="margin-bottom margin-xsmall">
-                                                                                <div class="product7_image-wrapper"><img
-                                                                                        src="{{ url_for('static', filename=project.image) }}"
-                                                                                        loading="lazy"
-                                                                                        alt="{{ project.name }}"
-                                                                                        class="product7_image" /></div>
+                                                                                <div class="product7_image-wrapper">
+                                                                                    <div class="title-card" style="background-color:{{ project.color }}">{{ project.name }}</div>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="margin-bottom margin-xxsmall">
                                                                                 <div

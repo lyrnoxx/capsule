@@ -7,6 +7,7 @@
   <h1>{{ "Edit" if item else "Create" }} Item</h1>
 
   <form method="POST" class="item-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <label>
       <span>Name</span>
       <input type="text" name="name" required

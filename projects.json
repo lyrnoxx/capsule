@@ -1,65 +1,82 @@
 [
     {
         "name": "3D Engine",
-        "desc": "desc...",
+        "desc": "Interactive 3D wireframe engine built with vanilla JavaScript and HTML5 Canvas. Features real-time rotation, projection, and custom geometry editing.",
         "image": "images/projects/engine.png",
         "link": "/graphics",
-        "tags": ["Graphics", "3D"]
+        "tags": ["Graphics", "3D"],
+        "color": "#00c5c5"
     },
     {
         "name": "MTP",
-        "desc": "desc...",
+        "desc": "Master thesis project on autonomous drone navigation and mapping using onboard sensors and real-time processing pipelines.",
         "image": "images/drone-image1.png",
         "link": "/drone",
-        "tags": ["Robotics", "Systems"]
+        "tags": ["Robotics", "Systems"],
+        "color": "#ff812d"
     },
     {
-        "name": "Drone mapper",
-        "desc": "desc...",
+        "name": "Drone Mapper",
+        "desc": "Autonomous drone mapping tool that stitches aerial imagery into geo-referenced orthomosaics using deep-learning-based alignment.",
         "image": "images/drone-image1.png",
         "link": "https://mapper.alanjugal.tech",
-        "tags": ["RL", "Deep Learning"]
+        "tags": ["RL", "Deep Learning"],
+        "color": "#f5c939"
     },
     {
         "name": "Visual SLAM - Lightweight",
-        "desc": "desc...",
+        "desc": "A lightweight Visual SLAM pipeline for resource-constrained platforms, combining sparse feature tracking with efficient loop closure.",
         "image": "images/papers1.png",
-        "link": "#",
-        "tags": ["SLAM", "Vision", "Robotics"]
+        "link": "/vision",
+        "tags": ["SLAM", "Vision", "Robotics"],
+        "color": "#ca9dfe"
     },
     {
         "name": "Vision",
-        "desc": "desc...",
+        "desc": "Computer vision research covering object detection, image segmentation, and DINOv2-based fine-tuning for agricultural applications.",
         "image": "images/papers1.png",
         "link": "/vision",
-        "tags": ["Vision", "Deep Learning"]
+        "tags": ["Vision", "Deep Learning"],
+        "color": "#7ae66a"
     },
     {
         "name": "NLP",
-        "desc": "desc...",
+        "desc": "Natural language processing experiments including transformer fine-tuning, text classification, and language understanding tasks.",
         "image": "images/agri.png",
         "link": "/nlp",
-        "tags": ["NLP", "Deep Learning"]
+        "tags": ["NLP", "Deep Learning"],
+        "color": "#f897b4"
     },
     {
         "name": "Talks",
-        "desc": "desc...",
+        "desc": "Collection of technical talks and presentations on AI, robotics, and systems engineering topics.",
         "image": "images/presenting.png",
         "link": "/talks",
-        "tags": ["Talks"]
+        "tags": ["Talks"],
+        "color": "#89dde4"
     },
     {
         "name": "Drone Stitching",
-        "desc": "desc...",
+        "desc": "Docker-containerised image stitching pipeline for drone survey imagery, producing high-resolution composite maps.",
         "image": "images/drone-image1.png",
         "link": "/drone/stitch",
-        "tags": ["Vision", "Robotics"]
+        "tags": ["Vision", "Robotics"],
+        "color": "#ff6b6b"
     },
     {
-        "name": "Personel Tracker",
-        "desc": "desc...",
+        "name": "Personal Tracker",
+        "desc": "Full-stack habit and goal tracking app with exponential decay progress rings, streak tracking, and a Keep-style journal.",
         "image": "images/papers1.png",
         "link": "/logger",
-        "tags": ["Data Analytics"]
+        "tags": ["Data Analytics"],
+        "color": "#6bcdb0"
+    },
+    {
+        "name": "Heart Disease Prediction",
+        "desc": "ML pipeline predicting heart disease using KNN, SVM, decision trees, and random forests on the UCI Heart Disease dataset with a Streamlit web app.",
+        "image": "images/papers1.png",
+        "link": "https://github.com/lyrnoxx/heart-disease-prediction",
+        "tags": ["Machine Learning", "Data Analytics"],
+        "color": "#e85d75"
     }
 ]
